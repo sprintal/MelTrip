@@ -128,6 +128,46 @@
             </objects>
             <point key="canvasLocation" x="2096.8000000000002" y="-475.41229385307349"/>
         </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="xUv-tm-dqo">
+            <objects>
+                <viewController storyboardIdentifier="detailViewController" id="dLk-yn-0RS" customClass="DetailViewController" customModule="MelTrip" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AkR-sX-Whm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="StG-zv-BHf">
+                                <rect key="frame" x="16" y="66" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ohh-Y9-t0e">
+                                <rect key="frame" x="16" y="20" width="34" height="30"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="dismiss:" destination="dLk-yn-0RS" eventType="touchUpInside" id="qc5-mH-VQr"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="StG-zv-BHf" firstAttribute="leading" secondItem="drs-0N-LoA" secondAttribute="leading" constant="16" id="6oF-1u-oe9"/>
+                            <constraint firstItem="drs-0N-LoA" firstAttribute="trailing" secondItem="StG-zv-BHf" secondAttribute="trailing" constant="16" id="99c-ai-gQy"/>
+                            <constraint firstItem="StG-zv-BHf" firstAttribute="top" secondItem="Ohh-Y9-t0e" secondAttribute="bottom" constant="16" id="Hle-3S-1Qc"/>
+                            <constraint firstItem="Ohh-Y9-t0e" firstAttribute="leading" secondItem="drs-0N-LoA" secondAttribute="leading" constant="16" id="jVq-Ph-Fku"/>
+                            <constraint firstItem="Ohh-Y9-t0e" firstAttribute="top" secondItem="drs-0N-LoA" secondAttribute="top" id="lqC-gy-XP5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="drs-0N-LoA"/>
+                    </view>
+                    <connections>
+                        <outlet property="nameLabel" destination="StG-zv-BHf" id="HGx-dj-U1q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XDg-Wa-aIA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2116" y="240"/>
+        </scene>
         <!--Add-->
         <scene sceneID="mig-Cd-nQO">
             <objects>

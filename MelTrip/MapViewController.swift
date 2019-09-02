@@ -15,6 +15,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     var allLocations = [Location]()
     var locationAnnotations = [LocationAnnotation]()
+    var geoLocations = [CLCircularRegion]()
     weak var databaseController: DatabaseProtocol?
     var locationManager: CLLocationManager = CLLocationManager()
     var currentLocation: CLLocationCoordinate2D?
@@ -38,6 +39,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.distanceFilter = 10
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,6 +60,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func onLocationListChange(change: DatabaseChange, locations: [Location]) {
         self.allLocations = locations
         updateAnnotations(locations: allLocations)
+        updateGeoLocations()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -65,12 +69,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
-    func focusOn(annotation: MKAnnotation) {
-        mapView.selectAnnotation(annotation, animated: true)
-        
-        let zoomRegion = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
-        mapView.setRegion(mapView.regionThatFits(zoomRegion), animated: true)
-    }
+    // TODO
+//    func focusOn(index: Int) {
+//        print(index)
+//        let annotation = locationAnnotations[index]
+//        mapView.selectAnnotation(annotation, animated: true)
+//
+//        let zoomRegion = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+//        mapView.setRegion(mapView.regionThatFits(zoomRegion), animated: true)
+//    }
     
     @IBAction func currentLocation(_ sender: Any) {
         guard let location = currentLocation else {
@@ -90,15 +97,48 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     */
     func updateAnnotations(locations: [Location]) {
-        locationAnnotations = []
+        self.locationAnnotations = []
         for location in locations {
-            locationAnnotations.append(LocationAnnotation(title: location.name!, subtitle: location.introduction!, latitude: location.latitude, longitude: location.longitude))
+            self.locationAnnotations.append(LocationAnnotation(title: location.name!, subtitle: location.introduction!, latitude: location.latitude, longitude: location.longitude))
         }
         self.mapView.removeAnnotations(mapView.annotations)
-        self.mapView.addAnnotations(locationAnnotations)
+        self.mapView.addAnnotations(self.locationAnnotations)
     }
     
+    func updateGeoLocations() {
+        print("update")
+        for geoLocation in self.geoLocations {
+            locationManager.stopMonitoring(for: geoLocation)
+        }
+        self.geoLocations = []
+        var geoLocation: CLCircularRegion
+        for location in self.allLocations {
+            geoLocation = CLCircularRegion(center: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude), radius: 100, identifier: location.name!)
+            geoLocation.notifyOnExit = true
+            geoLocation.notifyOnEntry = true
+            self.geoLocations.append(geoLocation)
+            locationManager.startMonitoring(for: geoLocation)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        let alert = UIAlertController(title: "Movement detected", message: "You entered \(region.identifier)", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        let alert = UIAlertController(title: "Movement detected", message: "You leaved \(region.identifier)", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    //Modified from https://stackoverflow.com/a/41187788
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        print(view.annotation?.title)
+        let detailViewController = self.storyboard?.instantiateViewController(withIdentifier: "detailViewController") as! DetailViewController
+        let index = locationAnnotations.firstIndex(of: view.annotation as! LocationAnnotation)
+        detailViewController.location = allLocations[index!]
+        self.present(detailViewController, animated: true, completion: nil)
     }
 }

@@ -97,6 +97,10 @@ class LocationTableViewController: UITableViewController, UISearchResultsUpdatin
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // TODO
         tableView.deselectRow(at: indexPath, animated: true)
+//        let mapViewController = MapViewController()
+//        let index = self.allLocations.firstIndex(of: filteredLocations[indexPath.row])
+//        mapViewController.focusOn(index: index!)
+//        navigationController?.popViewController(animated: true)
         return
     }
 

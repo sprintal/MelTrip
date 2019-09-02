@@ -24,6 +24,7 @@
 		FEF961AE231D86A6001E7BC8 /* LocationModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FEF9619F231D7219001E7BC8 /* LocationModel.xcdatamodeld */; };
 		FEF961F8231DA349001E7BC8 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF961F7231DA349001E7BC8 /* MapViewController.swift */; };
 		FEF961FA231DA3A6001E7BC8 /* LocationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF961F9231DA3A6001E7BC8 /* LocationAnnotation.swift */; };
+		FEF961FC231DBDF6001E7BC8 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF961FB231DBDF6001E7BC8 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,10 @@
 		FEF961AB231D7FAC001E7BC8 /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		FEF961F7231DA349001E7BC8 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		FEF961F9231DA3A6001E7BC8 /* LocationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAnnotation.swift; sourceTree = "<group>"; };
+		FEF961FB231DBDF6001E7BC8 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		FEF961FF231DD8FA001E7BC8 /* Old Melbourne Gaol.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Old Melbourne Gaol.gpx"; sourceTree = "<group>"; };
+		FEF96200231DD8FA001E7BC8 /* Melbourne Museum.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Melbourne Museum.gpx"; sourceTree = "<group>"; };
+		FEF96201231DDA43001E7BC8 /* Chinese Museum.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Chinese Museum.gpx"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +67,9 @@
 		FE30E0F3231D2D6F00C62946 = {
 			isa = PBXGroup;
 			children = (
+				FEF96201231DDA43001E7BC8 /* Chinese Museum.gpx */,
+				FEF96200231DD8FA001E7BC8 /* Melbourne Museum.gpx */,
+				FEF961FF231DD8FA001E7BC8 /* Old Melbourne Gaol.gpx */,
 				FE30E0FE231D2D6F00C62946 /* MelTrip */,
 				FE30E0FD231D2D6F00C62946 /* Products */,
 			);
@@ -92,6 +100,7 @@
 				FE30E11C231D2E8E00C62946 /* AddLocationDelegate.swift */,
 				FEF961F7231DA349001E7BC8 /* MapViewController.swift */,
 				FEF961F9231DA3A6001E7BC8 /* LocationAnnotation.swift */,
+				FEF961FB231DBDF6001E7BC8 /* DetailViewController.swift */,
 			);
 			path = MelTrip;
 			sourceTree = "<group>";
@@ -199,6 +208,7 @@
 				FEF961AC231D7FAC001E7BC8 /* MulticastDelegate.swift in Sources */,
 				FE30E100231D2D6F00C62946 /* AppDelegate.swift in Sources */,
 				FEF961FA231DA3A6001E7BC8 /* LocationAnnotation.swift in Sources */,
+				FEF961FC231DBDF6001E7BC8 /* DetailViewController.swift in Sources */,
 				FEF961A4231D7281001E7BC8 /* Location+CoreDataClass.swift in Sources */,
 				FE30E119231D2E5100C62946 /* CreateLocationViewController.swift in Sources */,
 			);
