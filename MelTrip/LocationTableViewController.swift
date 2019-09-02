@@ -85,7 +85,7 @@ class LocationTableViewController: UITableViewController, UISearchResultsUpdatin
         let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath) as! LocationTableViewCell
         let location = filteredLocations[indexPath.row]
         cell.nameLabel.text = location.name
-        cell.introductionTextView.text = location.introduction
+        cell.introductionLabel.text = location.introduction
 
         // Configure the cell...
 
