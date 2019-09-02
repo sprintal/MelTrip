@@ -22,7 +22,9 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZBl-4s-MOm">
-                                <rect key="frame" x="315" y="629" width="52" height="30"/>
+                                <rect key="frame" x="299" y="625" width="68" height="34"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
                                 <state key="normal" title="Current"/>
                                 <connections>
                                     <action selector="currentLocation:" destination="aDt-B5-Mr5" eventType="touchUpInside" id="b36-XP-Dbp"/>
@@ -105,12 +107,22 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Locations" id="FVd-0B-LlH">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Kw2-DM-zjV">
-                            <connections>
-                                <segue destination="YrQ-24-3hB" kind="show" identifier="createLocatoinSegue" id="3Xg-bo-VPL"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="Kw2-DM-zjV">
+                                <connections>
+                                    <segue destination="YrQ-24-3hB" kind="show" identifier="createLocatoinSegue" id="3Xg-bo-VPL"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Z-A" id="rc7-ej-Bue">
+                                <connections>
+                                    <action selector="barButton:" destination="d6D-L4-ukS" id="JS9-Yr-ygZ"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="barButton" destination="rc7-ej-Bue" id="TgS-Pq-yBa"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n97-Fu-SjJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -200,6 +212,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="introductionTextField" destination="bJw-jL-H6T" id="o2T-GA-Lth"/>
+                        <outlet property="mapView" destination="k1D-EF-UXW" id="iIM-Zw-k7w"/>
                         <outlet property="nameTextField" destination="MUx-u8-BfJ" id="WG0-tG-OQZ"/>
                     </connections>
                 </viewController>

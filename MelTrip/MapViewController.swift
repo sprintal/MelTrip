@@ -10,17 +10,20 @@ import UIKit
 import MapKit
 import CoreData
 
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, DatabaseListener {
     @IBOutlet weak var mapView: MKMapView!
     
-    var locations = [Location]()
+    var allLocations = [Location]()
     var locationAnnotations = [LocationAnnotation]()
+    weak var databaseController: DatabaseProtocol?
     var locationManager: CLLocationManager = CLLocationManager()
     var currentLocation: CLLocationCoordinate2D?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        databaseController = appDelegate.databaseController
         // Do any additional setup after loading the view.
         
         // Center the map to Melbourne CBD
@@ -40,11 +43,20 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         locationManager.startUpdatingLocation()
+        databaseController?.addListener(listener: self)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         locationManager.startUpdatingLocation()
+        databaseController?.removeListener(listener: self)
+    }
+    
+    var listenerType: ListenerType = ListenerType.locations
+    
+    func onLocationListChange(change: DatabaseChange, locations: [Location]) {
+        self.allLocations = locations
+        updateAnnotations(locations: allLocations)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -77,5 +89,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         // Pass the selected object to the new view controller.
     }
     */
-
+    func updateAnnotations(locations: [Location]) {
+        locationAnnotations = []
+        for location in locations {
+            locationAnnotations.append(LocationAnnotation(title: location.name!, subtitle: location.introduction!, latitude: location.latitude, longitude: location.longitude))
+        }
+        self.mapView.removeAnnotations(mapView.annotations)
+        self.mapView.addAnnotations(locationAnnotations)
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        print(view.annotation?.title)
+    }
 }

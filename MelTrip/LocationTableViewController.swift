@@ -14,7 +14,9 @@ class LocationTableViewController: UITableViewController, UISearchResultsUpdatin
     var filteredLocations = [Location]()
     weak var locationDelegate: AddLocationDelegate?
     weak var databaseController: DatabaseProtocol?
-
+    var alphabeticalFlag = 1
+    @IBOutlet weak var barButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -172,5 +174,18 @@ class LocationTableViewController: UITableViewController, UISearchResultsUpdatin
 //        allLocations.append(location)
 ////        mapViewController.mapView.addAnnotation(location)
 //    }
-
+    
+    @IBAction func barButton(_ sender: Any) {
+        if alphabeticalFlag == 0 {
+            filteredLocations = filteredLocations.sorted { $0.name! < $1.name! }
+            alphabeticalFlag = 1
+            barButton.title = "Z-A"
+        } else if alphabeticalFlag == 1 {
+            filteredLocations = filteredLocations.sorted { $0.name! > $1.name! }
+            alphabeticalFlag = 0
+            barButton.title = "A-Z"
+        }
+        tableView.reloadData()
+        print("tapped")
+    }
 }
