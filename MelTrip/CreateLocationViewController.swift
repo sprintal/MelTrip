@@ -10,13 +10,16 @@ import UIKit
 import MapKit
 
 class CreateLocationViewController: UIViewController {
-    weak var locationDelegate: AddLocationDelegate?
+//    weak var locationDelegate: AddLocationDelegate?
+    weak var databaseController: DatabaseProtocol?
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var introductionTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let appDelegate = UIApplication.shared .delegate as! AppDelegate
+        databaseController = appDelegate.databaseController
         // Do any additional setup after loading the view.
     }
     
@@ -37,8 +40,9 @@ class CreateLocationViewController: UIViewController {
             let latitude = 0.0
             let longitude = 0.0
             let image = ""
-            let location = Location(name: name, introduction: introduction, latitude: latitude, longitude: longitude, image: image)
-            let _ = locationDelegate!.addLocation(newLocation: location)
+//            let location = Location(name: name, introduction: introduction, latitude: latitude, longitude: longitude, image: image)
+//            let _ = locationDelegate!.addLocation(newLocation: location)
+            let _ = databaseController!.addLocation(name: name, introduction: introduction, latitude: latitude, longtude: longitude, image: image)
             navigationController?.popViewController(animated: true)
             return
         }

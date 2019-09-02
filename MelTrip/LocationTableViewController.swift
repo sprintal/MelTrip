@@ -8,11 +8,12 @@
 
 import UIKit
 
-class LocationTableViewController: UITableViewController, UISearchResultsUpdating, AddLocationDelegate {
+class LocationTableViewController: UITableViewController, UISearchResultsUpdating, /* AddLocationDelegate */DatabaseListener {
     // TODO
     var allLocations = [Location]()
     var filteredLocations = [Location]()
     weak var locationDelegate: AddLocationDelegate?
+    weak var databaseController: DatabaseProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,9 +23,11 @@ class LocationTableViewController: UITableViewController, UISearchResultsUpdatin
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        databaseController = appDelegate.databaseController
         
-        createDefaultLocations()
-        filteredLocations = allLocations
+//        createDefaultLocations()
+//        filteredLocations = allLocations
         
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
@@ -35,11 +38,28 @@ class LocationTableViewController: UITableViewController, UISearchResultsUpdatin
         definesPresentationContext = true
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        databaseController?.addListener(listener: self)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        databaseController?.removeListener(listener: self)
+    }
+    
+    var listenerType: ListenerType = ListenerType.locations
+    
+    func onLocationListChange(change: DatabaseChange, locations: [Location]) {
+        allLocations = locations
+        updateSearchResults(for: navigationItem.searchController!)
+    }
+    
     func updateSearchResults(for searchController: UISearchController) {
         if let searchText = searchController.searchBar.text, searchText.count > 0 {
             filteredLocations = allLocations.filter({
                 (location: Location) -> Bool in
-                return location.name.contains(searchText)
+                return location.name!.contains(searchText)
             })
         }
         else {
@@ -115,6 +135,7 @@ class LocationTableViewController: UITableViewController, UISearchResultsUpdatin
 
     // MARK: - Navigation
 
+    /*
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "createLocatoinSegue" {
@@ -124,31 +145,32 @@ class LocationTableViewController: UITableViewController, UISearchResultsUpdatin
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
+    */
     
-    func addLocation(newLocation: Location) -> Bool {
-        allLocations.append(newLocation)
-        filteredLocations.append(newLocation)
-        tableView.beginUpdates()
-        tableView.insertRows(at: [IndexPath(row: filteredLocations.count - 1, section: 0)], with: .automatic)
-        tableView.endUpdates()
-        tableView.reloadSections([0], with: .automatic)
-        return true
-    }
+//    func addLocation(newLocation: Location) -> Bool {
+//        allLocations.append(newLocation)
+//        filteredLocations.append(newLocation)
+//        tableView.beginUpdates()
+//        tableView.insertRows(at: [IndexPath(row: filteredLocations.count - 1, section: 0)], with: .automatic)
+//        tableView.endUpdates()
+//        tableView.reloadSections([0], with: .automatic)
+//        return true
+//    }
     
-    func createDefaultLocations() {
-//        let mapViewController = tabBarController?.children[0] as! MapViewController
-        
-        var location = Location(name: "Old Melbourne Gaol", introduction: "Step back in time to Melbourne’s most feared destination since 1845, Old Melbourne Gaol.", latitude: -37.8080028, longitude: 144.9629102, image: "")
-        allLocations.append(location)
-//        mapViewController.mapView.addAnnotation(location)
-        
-        location = Location(name: "Melbourne Museum", introduction: "A visit to Melbourne Museum is a rich, surprising insight into life in Victoria.", latitude: -37.8031888, longitude: 144.9695788, image: "")
-        allLocations.append(location)
-//        mapViewController.mapView.addAnnotation(location)
-        
-        location = Location(name: "Her Majesty's Theatre", introduction: "Her Majesty's Theatre, one of Melbourne's most iconic venues for live performance, has been entertaining Australia since 1886.", latitude: -37.8109121, longitude: 144.9675666, image: "")
-        allLocations.append(location)
-//        mapViewController.mapView.addAnnotation(location)
-    }
+//    func createDefaultLocations() {
+////        let mapViewController = tabBarController?.children[0] as! MapViewController
+//
+//        var location = Location(name: "Old Melbourne Gaol", introduction: "Step back in time to Melbourne’s most feared destination since 1845, Old Melbourne Gaol.", latitude: -37.8080028, longitude: 144.9629102, image: "")
+//        allLocations.append(location)
+////        mapViewController.mapView.addAnnotation(location)
+//
+//        location = Location(name: "Melbourne Museum", introduction: "A visit to Melbourne Museum is a rich, surprising insight into life in Victoria.", latitude: -37.8031888, longitude: 144.9695788, image: "")
+//        allLocations.append(location)
+////        mapViewController.mapView.addAnnotation(location)
+//
+//        location = Location(name: "Her Majesty's Theatre", introduction: "Her Majesty's Theatre, one of Melbourne's most iconic venues for live performance, has been entertaining Australia since 1886.", latitude: -37.8109121, longitude: 144.9675666, image: "")
+//        allLocations.append(location)
+////        mapViewController.mapView.addAnnotation(location)
+//    }
 
 }

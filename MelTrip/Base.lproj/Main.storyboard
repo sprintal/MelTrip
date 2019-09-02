@@ -51,14 +51,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aBD-KT-R4x">
-                            <rect key="frame" x="0.0" y="128" width="375" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Add"/>
-                            <connections>
-                                <segue destination="YrQ-24-3hB" kind="show" identifier="createLocatoinSegue" id="ytn-ax-VRW"/>
-                            </connections>
-                        </button>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="locationCell" rowHeight="100" id="xyk-iz-M8Q" customClass="LocationTableViewCell" customModule="MelTrip" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="100"/>
@@ -101,7 +93,13 @@
                             <outlet property="delegate" destination="d6D-L4-ukS" id="I9y-xH-ioH"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Locations" id="FVd-0B-LlH"/>
+                    <navigationItem key="navigationItem" title="Locations" id="FVd-0B-LlH">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Kw2-DM-zjV">
+                            <connections>
+                                <segue destination="YrQ-24-3hB" kind="show" identifier="createLocatoinSegue" id="3Xg-bo-VPL"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n97-Fu-SjJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -10,14 +10,18 @@
 		FE30E100231D2D6F00C62946 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE30E0FF231D2D6F00C62946 /* AppDelegate.swift */; };
 		FE30E102231D2D6F00C62946 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE30E101231D2D6F00C62946 /* ViewController.swift */; };
 		FE30E105231D2D6F00C62946 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE30E103231D2D6F00C62946 /* Main.storyboard */; };
-		FE30E108231D2D6F00C62946 /* MelTrip.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FE30E106231D2D6F00C62946 /* MelTrip.xcdatamodeld */; };
 		FE30E10A231D2D7100C62946 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE30E109231D2D7100C62946 /* Assets.xcassets */; };
 		FE30E10D231D2D7100C62946 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE30E10B231D2D7100C62946 /* LaunchScreen.storyboard */; };
-		FE30E115231D2DE600C62946 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE30E114231D2DE600C62946 /* Location.swift */; };
 		FE30E117231D2E0F00C62946 /* LocationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE30E116231D2E0F00C62946 /* LocationTableViewController.swift */; };
 		FE30E119231D2E5100C62946 /* CreateLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE30E118231D2E5100C62946 /* CreateLocationViewController.swift */; };
 		FE30E11B231D2E7000C62946 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE30E11A231D2E7000C62946 /* LocationTableViewCell.swift */; };
 		FE30E11D231D2E8E00C62946 /* AddLocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE30E11C231D2E8E00C62946 /* AddLocationDelegate.swift */; };
+		FEF961A4231D7281001E7BC8 /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF961A2231D7281001E7BC8 /* Location+CoreDataClass.swift */; };
+		FEF961A5231D7281001E7BC8 /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF961A3231D7281001E7BC8 /* Location+CoreDataProperties.swift */; };
+		FEF961A8231D73C1001E7BC8 /* DatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF961A7231D73C1001E7BC8 /* DatabaseProtocol.swift */; };
+		FEF961AA231D7539001E7BC8 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF961A9231D7539001E7BC8 /* CoreDataController.swift */; };
+		FEF961AC231D7FAC001E7BC8 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF961AB231D7FAC001E7BC8 /* MulticastDelegate.swift */; };
+		FEF961AE231D86A6001E7BC8 /* LocationModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FEF9619F231D7219001E7BC8 /* LocationModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,15 +29,19 @@
 		FE30E0FF231D2D6F00C62946 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FE30E101231D2D6F00C62946 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FE30E104231D2D6F00C62946 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		FE30E107231D2D6F00C62946 /* MelTrip.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MelTrip.xcdatamodel; sourceTree = "<group>"; };
 		FE30E109231D2D7100C62946 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FE30E10C231D2D7100C62946 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FE30E10E231D2D7100C62946 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FE30E114231D2DE600C62946 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		FE30E116231D2E0F00C62946 /* LocationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewController.swift; sourceTree = "<group>"; };
 		FE30E118231D2E5100C62946 /* CreateLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLocationViewController.swift; sourceTree = "<group>"; };
 		FE30E11A231D2E7000C62946 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		FE30E11C231D2E8E00C62946 /* AddLocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationDelegate.swift; sourceTree = "<group>"; };
+		FEF961A0231D7219001E7BC8 /* LocationModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LocationModel.xcdatamodel; sourceTree = "<group>"; };
+		FEF961A2231D7281001E7BC8 /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FEF961A3231D7281001E7BC8 /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FEF961A7231D73C1001E7BC8 /* DatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseProtocol.swift; sourceTree = "<group>"; };
+		FEF961A9231D7539001E7BC8 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
+		FEF961AB231D7FAC001E7BC8 /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,20 +74,40 @@
 		FE30E0FE231D2D6F00C62946 /* MelTrip */ = {
 			isa = PBXGroup;
 			children = (
+				FEF961A6231D73A8001E7BC8 /* Database */,
+				FEF9619B231D714B001E7BC8 /* DataMoidel */,
 				FE30E0FF231D2D6F00C62946 /* AppDelegate.swift */,
 				FE30E101231D2D6F00C62946 /* ViewController.swift */,
 				FE30E103231D2D6F00C62946 /* Main.storyboard */,
 				FE30E109231D2D7100C62946 /* Assets.xcassets */,
 				FE30E10B231D2D7100C62946 /* LaunchScreen.storyboard */,
 				FE30E10E231D2D7100C62946 /* Info.plist */,
-				FE30E106231D2D6F00C62946 /* MelTrip.xcdatamodeld */,
-				FE30E114231D2DE600C62946 /* Location.swift */,
 				FE30E116231D2E0F00C62946 /* LocationTableViewController.swift */,
 				FE30E118231D2E5100C62946 /* CreateLocationViewController.swift */,
 				FE30E11A231D2E7000C62946 /* LocationTableViewCell.swift */,
 				FE30E11C231D2E8E00C62946 /* AddLocationDelegate.swift */,
 			);
 			path = MelTrip;
+			sourceTree = "<group>";
+		};
+		FEF9619B231D714B001E7BC8 /* DataMoidel */ = {
+			isa = PBXGroup;
+			children = (
+				FEF961A2231D7281001E7BC8 /* Location+CoreDataClass.swift */,
+				FEF961A3231D7281001E7BC8 /* Location+CoreDataProperties.swift */,
+				FEF9619F231D7219001E7BC8 /* LocationModel.xcdatamodeld */,
+			);
+			path = DataMoidel;
+			sourceTree = "<group>";
+		};
+		FEF961A6231D73A8001E7BC8 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				FEF961A7231D73C1001E7BC8 /* DatabaseProtocol.swift */,
+				FEF961A9231D7539001E7BC8 /* CoreDataController.swift */,
+				FEF961AB231D7FAC001E7BC8 /* MulticastDelegate.swift */,
+			);
+			path = Database;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,13 +181,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE30E108231D2D6F00C62946 /* MelTrip.xcdatamodeld in Sources */,
+				FEF961AE231D86A6001E7BC8 /* LocationModel.xcdatamodeld in Sources */,
 				FE30E11D231D2E8E00C62946 /* AddLocationDelegate.swift in Sources */,
+				FEF961AA231D7539001E7BC8 /* CoreDataController.swift in Sources */,
+				FEF961A5231D7281001E7BC8 /* Location+CoreDataProperties.swift in Sources */,
 				FE30E11B231D2E7000C62946 /* LocationTableViewCell.swift in Sources */,
 				FE30E102231D2D6F00C62946 /* ViewController.swift in Sources */,
-				FE30E115231D2DE600C62946 /* Location.swift in Sources */,
+				FEF961A8231D73C1001E7BC8 /* DatabaseProtocol.swift in Sources */,
 				FE30E117231D2E0F00C62946 /* LocationTableViewController.swift in Sources */,
+				FEF961AC231D7FAC001E7BC8 /* MulticastDelegate.swift in Sources */,
 				FE30E100231D2D6F00C62946 /* AppDelegate.swift in Sources */,
+				FEF961A4231D7281001E7BC8 /* Location+CoreDataClass.swift in Sources */,
 				FE30E119231D2E5100C62946 /* CreateLocationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -360,13 +392,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		FE30E106231D2D6F00C62946 /* MelTrip.xcdatamodeld */ = {
+		FEF9619F231D7219001E7BC8 /* LocationModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				FE30E107231D2D6F00C62946 /* MelTrip.xcdatamodel */,
+				FEF961A0231D7219001E7BC8 /* LocationModel.xcdatamodel */,
 			);
-			currentVersion = FE30E107231D2D6F00C62946 /* MelTrip.xcdatamodel */;
-			path = MelTrip.xcdatamodeld;
+			currentVersion = FEF961A0231D7219001E7BC8 /* LocationModel.xcdatamodel */;
+			path = LocationModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
