@@ -1,0 +1,376 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FE30E100231D2D6F00C62946 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE30E0FF231D2D6F00C62946 /* AppDelegate.swift */; };
+		FE30E102231D2D6F00C62946 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE30E101231D2D6F00C62946 /* ViewController.swift */; };
+		FE30E105231D2D6F00C62946 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE30E103231D2D6F00C62946 /* Main.storyboard */; };
+		FE30E108231D2D6F00C62946 /* MelTrip.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FE30E106231D2D6F00C62946 /* MelTrip.xcdatamodeld */; };
+		FE30E10A231D2D7100C62946 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE30E109231D2D7100C62946 /* Assets.xcassets */; };
+		FE30E10D231D2D7100C62946 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE30E10B231D2D7100C62946 /* LaunchScreen.storyboard */; };
+		FE30E115231D2DE600C62946 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE30E114231D2DE600C62946 /* Location.swift */; };
+		FE30E117231D2E0F00C62946 /* LocationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE30E116231D2E0F00C62946 /* LocationTableViewController.swift */; };
+		FE30E119231D2E5100C62946 /* CreateLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE30E118231D2E5100C62946 /* CreateLocationViewController.swift */; };
+		FE30E11B231D2E7000C62946 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE30E11A231D2E7000C62946 /* LocationTableViewCell.swift */; };
+		FE30E11D231D2E8E00C62946 /* AddLocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE30E11C231D2E8E00C62946 /* AddLocationDelegate.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FE30E0FC231D2D6F00C62946 /* MelTrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MelTrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE30E0FF231D2D6F00C62946 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FE30E101231D2D6F00C62946 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FE30E104231D2D6F00C62946 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FE30E107231D2D6F00C62946 /* MelTrip.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MelTrip.xcdatamodel; sourceTree = "<group>"; };
+		FE30E109231D2D7100C62946 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FE30E10C231D2D7100C62946 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FE30E10E231D2D7100C62946 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FE30E114231D2DE600C62946 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		FE30E116231D2E0F00C62946 /* LocationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewController.swift; sourceTree = "<group>"; };
+		FE30E118231D2E5100C62946 /* CreateLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLocationViewController.swift; sourceTree = "<group>"; };
+		FE30E11A231D2E7000C62946 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
+		FE30E11C231D2E8E00C62946 /* AddLocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationDelegate.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FE30E0F9231D2D6F00C62946 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FE30E0F3231D2D6F00C62946 = {
+			isa = PBXGroup;
+			children = (
+				FE30E0FE231D2D6F00C62946 /* MelTrip */,
+				FE30E0FD231D2D6F00C62946 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FE30E0FD231D2D6F00C62946 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FE30E0FC231D2D6F00C62946 /* MelTrip.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FE30E0FE231D2D6F00C62946 /* MelTrip */ = {
+			isa = PBXGroup;
+			children = (
+				FE30E0FF231D2D6F00C62946 /* AppDelegate.swift */,
+				FE30E101231D2D6F00C62946 /* ViewController.swift */,
+				FE30E103231D2D6F00C62946 /* Main.storyboard */,
+				FE30E109231D2D7100C62946 /* Assets.xcassets */,
+				FE30E10B231D2D7100C62946 /* LaunchScreen.storyboard */,
+				FE30E10E231D2D7100C62946 /* Info.plist */,
+				FE30E106231D2D6F00C62946 /* MelTrip.xcdatamodeld */,
+				FE30E114231D2DE600C62946 /* Location.swift */,
+				FE30E116231D2E0F00C62946 /* LocationTableViewController.swift */,
+				FE30E118231D2E5100C62946 /* CreateLocationViewController.swift */,
+				FE30E11A231D2E7000C62946 /* LocationTableViewCell.swift */,
+				FE30E11C231D2E8E00C62946 /* AddLocationDelegate.swift */,
+			);
+			path = MelTrip;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FE30E0FB231D2D6F00C62946 /* MelTrip */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE30E111231D2D7100C62946 /* Build configuration list for PBXNativeTarget "MelTrip" */;
+			buildPhases = (
+				FE30E0F8231D2D6F00C62946 /* Sources */,
+				FE30E0F9231D2D6F00C62946 /* Frameworks */,
+				FE30E0FA231D2D6F00C62946 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MelTrip;
+			productName = MelTrip;
+			productReference = FE30E0FC231D2D6F00C62946 /* MelTrip.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FE30E0F4231D2D6F00C62946 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "Kang Meng";
+				TargetAttributes = {
+					FE30E0FB231D2D6F00C62946 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = FE30E0F7231D2D6F00C62946 /* Build configuration list for PBXProject "MelTrip" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FE30E0F3231D2D6F00C62946;
+			productRefGroup = FE30E0FD231D2D6F00C62946 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FE30E0FB231D2D6F00C62946 /* MelTrip */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FE30E0FA231D2D6F00C62946 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE30E10D231D2D7100C62946 /* LaunchScreen.storyboard in Resources */,
+				FE30E10A231D2D7100C62946 /* Assets.xcassets in Resources */,
+				FE30E105231D2D6F00C62946 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FE30E0F8231D2D6F00C62946 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE30E108231D2D6F00C62946 /* MelTrip.xcdatamodeld in Sources */,
+				FE30E11D231D2E8E00C62946 /* AddLocationDelegate.swift in Sources */,
+				FE30E11B231D2E7000C62946 /* LocationTableViewCell.swift in Sources */,
+				FE30E102231D2D6F00C62946 /* ViewController.swift in Sources */,
+				FE30E115231D2DE600C62946 /* Location.swift in Sources */,
+				FE30E117231D2E0F00C62946 /* LocationTableViewController.swift in Sources */,
+				FE30E100231D2D6F00C62946 /* AppDelegate.swift in Sources */,
+				FE30E119231D2E5100C62946 /* CreateLocationViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FE30E103231D2D6F00C62946 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FE30E104231D2D6F00C62946 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FE30E10B231D2D7100C62946 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FE30E10C231D2D7100C62946 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FE30E10F231D2D7100C62946 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FE30E110231D2D7100C62946 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FE30E112231D2D7100C62946 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = MelTrip/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Monash.MelTrip;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FE30E113231D2D7100C62946 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = MelTrip/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Monash.MelTrip;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FE30E0F7231D2D6F00C62946 /* Build configuration list for PBXProject "MelTrip" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE30E10F231D2D7100C62946 /* Debug */,
+				FE30E110231D2D7100C62946 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FE30E111231D2D7100C62946 /* Build configuration list for PBXNativeTarget "MelTrip" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE30E112231D2D7100C62946 /* Debug */,
+				FE30E113231D2D7100C62946 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		FE30E106231D2D6F00C62946 /* MelTrip.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FE30E107231D2D6F00C62946 /* MelTrip.xcdatamodel */,
+			);
+			currentVersion = FE30E107231D2D6F00C62946 /* MelTrip.xcdatamodel */;
+			path = MelTrip.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = FE30E0F4231D2D6F00C62946 /* Project object */;
+}
