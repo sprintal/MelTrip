@@ -13,7 +13,7 @@
         <!--Map-->
         <scene sceneID="5xl-hb-tEh">
             <objects>
-                <viewController id="aDt-B5-Mr5" sceneMemberID="viewController">
+                <viewController id="aDt-B5-Mr5" customClass="MapViewController" customModule="MelTrip" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="x1S-GZ-xgD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -21,13 +21,22 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="jkc-wq-wR2">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZBl-4s-MOm">
+                                <rect key="frame" x="315" y="629" width="52" height="30"/>
+                                <state key="normal" title="Current"/>
+                                <connections>
+                                    <action selector="currentLocation:" destination="aDt-B5-Mr5" eventType="touchUpInside" id="b36-XP-Dbp"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="kwQ-0T-cbB" firstAttribute="trailing" secondItem="jkc-wq-wR2" secondAttribute="trailing" id="2LC-YD-XaZ"/>
                             <constraint firstItem="kwQ-0T-cbB" firstAttribute="bottom" secondItem="jkc-wq-wR2" secondAttribute="bottom" id="Hnq-WY-c8h"/>
                             <constraint firstItem="jkc-wq-wR2" firstAttribute="top" secondItem="kwQ-0T-cbB" secondAttribute="top" id="KVf-Do-Lcj"/>
+                            <constraint firstItem="kwQ-0T-cbB" firstAttribute="bottom" secondItem="ZBl-4s-MOm" secondAttribute="bottom" constant="8" id="fER-dq-HLp"/>
                             <constraint firstItem="jkc-wq-wR2" firstAttribute="leading" secondItem="kwQ-0T-cbB" secondAttribute="leading" id="iDP-42-5OP"/>
+                            <constraint firstItem="kwQ-0T-cbB" firstAttribute="trailing" secondItem="ZBl-4s-MOm" secondAttribute="trailing" constant="8" id="yBb-e7-6uv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kwQ-0T-cbB"/>
                     </view>
@@ -38,6 +47,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="jkc-wq-wR2" id="EEh-j7-OYk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W0x-QS-Mzn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
