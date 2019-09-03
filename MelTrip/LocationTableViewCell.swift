@@ -11,6 +11,7 @@ import UIKit
 class LocationTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var introductionLabel: UILabel!
+    @IBOutlet weak var locationImage: UIImageView!
     
     
     override func awakeFromNib() {

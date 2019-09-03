@@ -103,6 +103,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         self.mapView.removeAnnotations(mapView.annotations)
         self.mapView.addAnnotations(self.locationAnnotations)
+//        for locationAnnotation in self.locationAnnotations {
+//            let anView = mapView.view(for: locationAnnotation)
+//                anView.image = #imageLiteral(resourceName: "Old Melbourne Gaol")
+//        }
     }
     
     func updateGeoLocations() {
@@ -128,7 +132,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        let alert = UIAlertController(title: "Movement detected", message: "You leaved \(region.identifier)", preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: "Movement detected", message: "You left \(region.identifier)", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
@@ -141,4 +145,23 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         detailViewController.location = allLocations[index!]
         self.present(detailViewController, animated: true, completion: nil)
     }
+
+//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+//        if !(annotation is MKPointAnnotation) {
+//            return nil
+//        }
+//        let annotationIndetifier = "AnnotationIdentifier"
+//        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIndetifier)
+//        
+//        if annotationView == nil {
+//            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIndetifier)
+//            annotationView!.canShowCallout = true
+//        } else {
+//            annotationView!.annotation = annotation
+//        }
+//        
+//        let image = #imageLiteral(resourceName: "Old Melbourne Gaol")
+//        annotationView!.image = image
+//        return annotationView
+//    }
 }
