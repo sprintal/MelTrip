@@ -52,6 +52,10 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         return location
     }
     
+    func updateLocation(locatoin: Location){
+        persistantContainer.viewContext.sa
+    }
+    
     func deleteLocation(location: Location) {
         persistantContainer.viewContext.delete(location)
         saveContext()

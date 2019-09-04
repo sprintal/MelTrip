@@ -9,8 +9,9 @@
 import UIKit
 import MapKit
 import CoreData
+import UserNotifications
 
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, DatabaseListener {
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, DatabaseListener, ChooseLocationDelegate {
     @IBOutlet weak var mapView: MKMapView!
     
     var allLocations = [Location]()
@@ -39,14 +40,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.distanceFilter = 10
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         locationManager.startUpdatingLocation()
         databaseController?.addListener(listener: self)
+        updateAnnotations(locations: allLocations)
+        updateGeoLocations()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -87,15 +88,19 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let zoomRegion = MKCoordinateRegion(center: location, latitudinalMeters: 500, longitudinalMeters: 500)
         mapView.setRegion(mapView.regionThatFits(zoomRegion), animated: true)
     }
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "mapTableSegue" {
+            let destination = segue.destination as! LocationTableViewController
+            destination.chooseLocationDelegate = self
+        }
     }
-    */
+
     func updateAnnotations(locations: [Location]) {
         self.locationAnnotations = []
         for location in locations {
@@ -110,7 +115,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func updateGeoLocations() {
-        print("update")
         for geoLocation in self.geoLocations {
             locationManager.stopMonitoring(for: geoLocation)
         }
@@ -126,17 +130,42 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        let alert = UIAlertController(title: "Movement detected", message: "You entered \(region.identifier)", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        let state = UIApplication.shared.applicationState
+        if state == .active {
+            let alert = UIAlertController(title: "Movement detected", message: "You entered \(region.identifier)", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        } else if state == .background || state == .inactive {
+            let content = UNMutableNotificationContent()
+            content.title = "Movement detected"
+            content.body = "Welcome to " + region.identifier
+            content.sound = UNNotificationSound.default
+            
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
+            let request = UNNotificationRequest(identifier: "geoFence", content: content, trigger: trigger)
+            
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        let alert = UIAlertController(title: "Movement detected", message: "You left \(region.identifier)", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        let state = UIApplication.shared.applicationState
+        if state == .active {
+            let alert = UIAlertController(title: "Movement detected", message: "You left \(region.identifier)", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        } else if state == .background || state == .inactive {
+            let content = UNMutableNotificationContent()
+            content.title = "Movement detected"
+            content.body = "You left " + region.identifier
+            content.sound = UNNotificationSound.default
+            
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
+            let request = UNNotificationRequest(identifier: "geoFence", content: content, trigger: trigger)
+            
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        }
     }
-    
     
     //Modified from https://stackoverflow.com/a/41187788
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
@@ -145,23 +174,55 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         detailViewController.location = allLocations[index!]
         self.present(detailViewController, animated: true, completion: nil)
     }
-
-//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-//        if !(annotation is MKPointAnnotation) {
-//            return nil
-//        }
-//        let annotationIndetifier = "AnnotationIdentifier"
-//        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIndetifier)
-//        
-//        if annotationView == nil {
-//            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIndetifier)
-//            annotationView!.canShowCallout = true
-//        } else {
-//            annotationView!.annotation = annotation
-//        }
-//        
-//        let image = #imageLiteral(resourceName: "Old Melbourne Gaol")
-//        annotationView!.image = image
-//        return annotationView
-//    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if !(annotation is LocationAnnotation) {
+            return nil
+        }
+        let resueId = annotation.title!
+        var anView = mapView.dequeueReusableAnnotationView(withIdentifier: resueId!)
+        if anView == nil {
+            anView = MKAnnotationView(annotation: annotation, reuseIdentifier: resueId)
+            let size = CGSize(width: 40, height: 40)
+            let location: Location = allLocations[locationAnnotations.firstIndex(of: annotation as! LocationAnnotation)!]
+            var pinImage: UIImage
+            if Int(location.image!) == nil {
+                let fileName = location.image!
+                pinImage = UIImage(named: fileName)!
+            } else {
+                let fileName = location.image
+                print(location)
+                pinImage = loadImageData(fileName: fileName!)!
+            }
+            UIGraphicsBeginImageContext(size)
+            pinImage.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+            let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+            anView?.image = resizedImage
+            let subtitleView = UIButton()
+            subtitleView.titleLabel?.text = "click"
+            anView?.rightCalloutAccessoryView = subtitleView
+            anView!.canShowCallout = true
+            anView!.isEnabled = true
+        }
+        return anView
+    }
+    
+    func loadImageData(fileName: String) -> UIImage? {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        let url = NSURL(fileURLWithPath: path)
+        var image: UIImage?
+        if let pathComponent = url.appendingPathComponent(fileName) {
+            let filePath = pathComponent.path
+            let fileManager = FileManager.default
+            let fileData = fileManager.contents(atPath: filePath)
+            image = UIImage(data: fileData!)
+        }
+        return image
+    }
+    
+    func centerOnChosen(index: Int) {
+        print(index)
+        let zoomRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: allLocations[index].latitude, longitude: allLocations[index].longitude), latitudinalMeters: 500, longitudinalMeters: 500)
+        mapView.setRegion(mapView.regionThatFits(zoomRegion), animated: true)
+    }
 }

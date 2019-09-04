@@ -17,6 +17,8 @@ class LocationTableViewController: UITableViewController, UISearchResultsUpdatin
     var alphabeticalFlag = 1
     @IBOutlet weak var barButton: UIBarButtonItem!
     
+    weak var chooseLocationDelegate: ChooseLocationDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -109,29 +111,30 @@ class LocationTableViewController: UITableViewController, UISearchResultsUpdatin
 //        let mapViewController = MapViewController()
 //        let index = self.allLocations.firstIndex(of: filteredLocations[indexPath.row])
 //        mapViewController.focusOn(index: index!)
-//        navigationController?.popViewController(animated: true)
+        chooseLocationDelegate?.centerOnChosen(index: allLocations.firstIndex(of: filteredLocations[indexPath.row])!)
+        navigationController?.popViewController(animated: true)
         return
     }
 
-    /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
 
-    /*
     // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
+//            let locationToBeDeleted = filteredLocations[indexPath.row]
+//            filteredLocations.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+//            databaseController?.deleteLocation(location: locationToBeDeleted)
+            databaseController?.deleteLocation(location: filteredLocations[indexPath.row])
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
 
     /*
     // Override to support rearranging the table view.

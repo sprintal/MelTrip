@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, UpdateLocationDelegate {
     var location: Location?
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var introductionLabel: UILabel!
@@ -18,6 +18,10 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         nameLabel.text = location!.name
         introductionLabel.text = location!.introduction
         if (location!.image != "") {
@@ -33,9 +37,6 @@ class DetailViewController: UIViewController {
         mapView.addAnnotation(LocationAnnotation(title: location!.name!, subtitle: location!.introduction!, latitude: location!.latitude, longitude: location!.longitude))
         let zoomRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location!.latitude, longitude: location!.longitude), latitudinalMeters: 500, longitudinalMeters: 500)
         mapView.setRegion(mapView.regionThatFits(zoomRegion), animated: true)
-        
-        
-        // Do any additional setup after loading the view.
     }
     
     func loadImageData(fileName: String) -> UIImage? {
@@ -51,17 +52,24 @@ class DetailViewController: UIViewController {
         return image
     }
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "updateLocationSegue" {
+            let destination = segue.destination as! EditLocationViewController
+            destination.location = self.location
+            destination.updateLocationDelegate = self
+        }
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    */
+
     @IBAction func dismiss(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
+    func updateLocation(location: Location) {
+        self.location = location
+    }
 }

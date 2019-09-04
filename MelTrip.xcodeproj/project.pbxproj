@@ -16,6 +16,9 @@
 		FE30E119231D2E5100C62946 /* CreateLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE30E118231D2E5100C62946 /* CreateLocationViewController.swift */; };
 		FE30E11B231D2E7000C62946 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE30E11A231D2E7000C62946 /* LocationTableViewCell.swift */; };
 		FE30E11D231D2E8E00C62946 /* AddLocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE30E11C231D2E8E00C62946 /* AddLocationDelegate.swift */; };
+		FE681DB9232001CF00655967 /* ChooseLocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE681DB8232001CF00655967 /* ChooseLocationDelegate.swift */; };
+		FE681DBB23202B0900655967 /* UpdateLocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE681DBA23202B0900655967 /* UpdateLocationDelegate.swift */; };
+		FE681DBD23202C3C00655967 /* EditLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE681DBC23202C3C00655967 /* EditLocationViewController.swift */; };
 		FEF961A4231D7281001E7BC8 /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF961A2231D7281001E7BC8 /* Location+CoreDataClass.swift */; };
 		FEF961A5231D7281001E7BC8 /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF961A3231D7281001E7BC8 /* Location+CoreDataProperties.swift */; };
 		FEF961A8231D73C1001E7BC8 /* DatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF961A7231D73C1001E7BC8 /* DatabaseProtocol.swift */; };
@@ -39,6 +42,9 @@
 		FE30E118231D2E5100C62946 /* CreateLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLocationViewController.swift; sourceTree = "<group>"; };
 		FE30E11A231D2E7000C62946 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		FE30E11C231D2E8E00C62946 /* AddLocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationDelegate.swift; sourceTree = "<group>"; };
+		FE681DB8232001CF00655967 /* ChooseLocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseLocationDelegate.swift; sourceTree = "<group>"; };
+		FE681DBA23202B0900655967 /* UpdateLocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateLocationDelegate.swift; sourceTree = "<group>"; };
+		FE681DBC23202C3C00655967 /* EditLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLocationViewController.swift; sourceTree = "<group>"; };
 		FEF961A0231D7219001E7BC8 /* LocationModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LocationModel.xcdatamodel; sourceTree = "<group>"; };
 		FEF961A2231D7281001E7BC8 /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FEF961A3231D7281001E7BC8 /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -101,6 +107,9 @@
 				FEF961F7231DA349001E7BC8 /* MapViewController.swift */,
 				FEF961F9231DA3A6001E7BC8 /* LocationAnnotation.swift */,
 				FEF961FB231DBDF6001E7BC8 /* DetailViewController.swift */,
+				FE681DB8232001CF00655967 /* ChooseLocationDelegate.swift */,
+				FE681DBA23202B0900655967 /* UpdateLocationDelegate.swift */,
+				FE681DBC23202C3C00655967 /* EditLocationViewController.swift */,
 			);
 			path = MelTrip;
 			sourceTree = "<group>";
@@ -157,6 +166,14 @@
 				TargetAttributes = {
 					FE30E0FB231D2D6F00C62946 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -204,10 +221,13 @@
 				FE30E102231D2D6F00C62946 /* ViewController.swift in Sources */,
 				FEF961F8231DA349001E7BC8 /* MapViewController.swift in Sources */,
 				FEF961A8231D73C1001E7BC8 /* DatabaseProtocol.swift in Sources */,
+				FE681DBB23202B0900655967 /* UpdateLocationDelegate.swift in Sources */,
 				FE30E117231D2E0F00C62946 /* LocationTableViewController.swift in Sources */,
 				FEF961AC231D7FAC001E7BC8 /* MulticastDelegate.swift in Sources */,
 				FE30E100231D2D6F00C62946 /* AppDelegate.swift in Sources */,
+				FE681DBD23202C3C00655967 /* EditLocationViewController.swift in Sources */,
 				FEF961FA231DA3A6001E7BC8 /* LocationAnnotation.swift in Sources */,
+				FE681DB9232001CF00655967 /* ChooseLocationDelegate.swift in Sources */,
 				FEF961FC231DBDF6001E7BC8 /* DetailViewController.swift in Sources */,
 				FEF961A4231D7281001E7BC8 /* Location+CoreDataClass.swift in Sources */,
 				FE30E119231D2E5100C62946 /* CreateLocationViewController.swift in Sources */,
@@ -357,6 +377,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MelTrip/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -374,6 +395,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MelTrip/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

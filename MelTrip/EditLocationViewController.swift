@@ -1,46 +1,50 @@
 //
-//  CreateLocationViewController.swift
+//  EditLocationViewController.swift
 //  MelTrip
 //
-//  Created by Kang Meng on 2/9/19.
+//  Created by Kang Meng on 5/9/19.
 //  Copyright © 2019 Kang Meng. All rights reserved.
 //
 
 import UIKit
 import MapKit
-import CoreMotion
+import CoreData
 
-class CreateLocationViewController: UIViewController, UIGestureRecognizerDelegate, MKMapViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITextFieldDelegate {
-//    weak var locationDelegate: AddLocationDelegate?
+class EditLocationViewController: UIViewController, UIGestureRecognizerDelegate, MKMapViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITextFieldDelegate {
     weak var databaseController: DatabaseProtocol?
+    var location: Location?
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var introductionTextView: UITextView!
     @IBOutlet weak var mapView: MKMapView!
-    //    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var imageView: UIImageView!
-    //    @IBOutlet weak var introductionTextField: UITextField!
-//    @IBOutlet weak var mapView: MKMapView!
     var locationAnnotation: MKPointAnnotation?
-//    let motionManager: CMMotionManager = CMMotionManager()
+    weak var updateLocationDelegate: UpdateLocationDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         introductionTextView.layer.borderWidth = 1
         introductionTextView.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         introductionTextView.layer.cornerRadius = 5.0
-        // Center the map to Melbourne CBD
-        // Inspired from https://hangge.com/blog/cache/detail_1878.html
+        // Do any additional setup after loading the view.
         self.mapView.delegate = self
         self.nameTextField.delegate = self
         self.introductionTextView.delegate = self
-        let centerLocationSpan: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-        let center:CLLocation = CLLocation(latitude: -37.8136, longitude: 144.9631)
-        let centerRegion: MKCoordinateRegion = MKCoordinateRegion(center: center.coordinate, span: centerLocationSpan)
-        self.mapView.setRegion(centerRegion, animated: true)
+        
+        if (location!.image != "") {
+            if Int(location!.image!) != nil {
+                imageView.image = loadImageData(fileName: location!.image!)
+            } else {
+                imageView.image = UIImage(named: location!.image ?? "placeholder")
+            }
+        } else {
+            imageView.image = UIImage(named: "placeholder")
+        }
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         databaseController = appDelegate.databaseController
-        // Do any additional setup after loading the view.
+        
+        let zoomRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location!.latitude, longitude: location!.longitude), latitudinalMeters: 500, longitudinalMeters: 500)
+        mapView.setRegion(mapView.regionThatFits(zoomRegion), animated: true)
         
         // Tap gesture on map
         // Modified from https://stackoverflow.com/a/53885008
@@ -49,28 +53,11 @@ class CreateLocationViewController: UIViewController, UIGestureRecognizerDelegat
         mapView.addGestureRecognizer(gestureRecoginzer)
     }
     
-    @IBAction func takePhoto(_ sender: Any) {
-        let controller = UIImagePickerController()
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            controller.sourceType = .camera
-        } else {
-            controller.sourceType = .photoLibrary
-        }
-        controller.allowsEditing = false
-        controller.delegate = self
-        self.present(controller, animated: true, completion: nil)
+    @IBAction func back(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    @IBAction func saveLocation(_ sender: Any) {
+    @IBAction func save(_ sender: Any) {
         if nameTextField.text != "" && introductionTextView.text != "" && locationAnnotation != nil  && imageView.image != nil && imageView.image != UIImage(named: "placeholder") {
             let name = nameTextField.text!
             let introduction = introductionTextView.text!
@@ -88,11 +75,12 @@ class CreateLocationViewController: UIViewController, UIGestureRecognizerDelegat
                 fileManager.createFile(atPath: filePath, contents: data, attributes: nil)
             }
             
-//            let location = Location(name: name, introduction: introduction, latitude: latitude, longitude: longitude, image: image)
-//            let _ = locationDelegate!.addLocation(newLocation: location)
-            let _ = databaseController!.addLocation(name: name, introduction: introduction, latitude: latitude, longtude: longitude, image: String(date))
+            //            let location = Location(name: name, introduction: introduction, latitude: latitude, longitude: longitude, image: image)
+            //            let _ = locationDelegate!.addLocation(newLocation: location)
+            let _ = databaseController!.
             print("added")
-            navigationController?.popViewController(animated: true)
+            updateLocationDelegate?.updateLocation(location: location!)
+            self.dismiss(animated: true, completion: nil)
             return
         }
         var errorMsg = "Please ensure all info has been provided!"
@@ -111,10 +99,16 @@ class CreateLocationViewController: UIViewController, UIGestureRecognizerDelegat
         displayMessage(title: "Not all fields filled", message: errorMsg)
     }
     
-    func displayMessage(title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
-        self.present(alertController, animated: true, completion: nil)
+    @IBAction func takePhoto(_ sender: Any) {
+        let controller = UIImagePickerController()
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            controller.sourceType = .camera
+        } else {
+            controller.sourceType = .photoLibrary
+        }
+        controller.allowsEditing = false
+        controller.delegate = self
+        self.present(controller, animated: true, completion: nil)
     }
     
     // Show annotation when tap on map
@@ -147,7 +141,7 @@ class CreateLocationViewController: UIViewController, UIGestureRecognizerDelegat
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         print("Error when getting the image")
-        dismiss(animated: true, completion: nil)	
+        dismiss(animated: true, completion: nil)
     }
     
     // Limit the number of characters
@@ -169,5 +163,34 @@ class CreateLocationViewController: UIViewController, UIGestureRecognizerDelegat
         let changedText = currentText.replacingCharacters(in: stringRange, with: string)
         return changedText.count <= 100
     }
-}
+    
+    func displayMessage(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func loadImageData(fileName: String) -> UIImage? {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        let url = NSURL(fileURLWithPath: path)
+        var image: UIImage?
+        if let pathComponent = url.appendingPathComponent(fileName) {
+            let filePath = pathComponent.path
+            let fileManager = FileManager.default
+            let fileData = fileManager.contents(atPath: filePath)
+            image = UIImage(data: fileData!)
+        }
+        return image
+    }
+    
+    /*
+    // MARK: - Navigation
 
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}

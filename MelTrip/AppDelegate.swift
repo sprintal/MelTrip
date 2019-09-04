@@ -8,9 +8,10 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
     var databaseController: DatabaseProtocol?
@@ -18,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         databaseController = CoreDataController()
+        self.configNotifications()
         return true
     }
 
@@ -44,6 +46,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
 //        self.saveContext()
     }
+    
+    func configNotifications() {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.badge, .alert, .sound], completionHandler: { (granted, error) in})
+    }
+//
+//    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+//        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+//        print("APN's token: \(deviceTokenString)")
+//    }
+//
+//    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+//        print("APN error: \(error)")
+//    }
 
     // MARK: - Core Data stack
 
