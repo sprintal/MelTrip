@@ -48,12 +48,30 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         location.latitude = latitude
         location.longitude = longtude
         location.image = image
+        location.createTime = String(Date().timeIntervalSince1970)
         saveContext()
         return location
     }
     
-    func updateLocation(locatoin: Location){
-        persistantContainer.viewContext.sa
+    func updateLocation(location: Location) {
+//        persistantContainer.viewContext.sa
+        let managedObjectContext = self.persistantContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Location")
+        fetchRequest.predicate = NSPredicate(format: "createTime == %@", location.createTime!)
+        let result = try? managedObjectContext.fetch(fetchRequest)
+        let resultData = result as! [Location]
+        print(resultData[0].name)
+        resultData[0].setValue(location.name, forKey: "name")
+        resultData[0].setValue(location.introduction, forKey: "introduction")
+        resultData[0].setValue(location.latitude, forKey: "latitude")
+        resultData[0].setValue(location.longitude, forKey: "longitude")
+        resultData[0].setValue(location.image, forKey: "image")
+        do {
+            try managedObjectContext.save()
+            print("updated")
+        } catch let error as NSError {
+            print("Could not save: \(error), \(error.userInfo)")
+        }
     }
     
     func deleteLocation(location: Location) {

@@ -19,6 +19,7 @@ class EditLocationViewController: UIViewController, UIGestureRecognizerDelegate,
     @IBOutlet weak var mapView: MKMapView!
     var locationAnnotation: MKPointAnnotation?
     weak var updateLocationDelegate: UpdateLocationDelegate?
+    var imageChanged = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,15 @@ class EditLocationViewController: UIViewController, UIGestureRecognizerDelegate,
         self.mapView.delegate = self
         self.nameTextField.delegate = self
         self.introductionTextView.delegate = self
+        
+        self.locationAnnotation = MKPointAnnotation()
+        self.locationAnnotation!.coordinate = CLLocationCoordinate2D(latitude: location!.latitude, longitude: location!.longitude)
+        self.mapView.addAnnotation(locationAnnotation!)
+        print(locationAnnotation!.coordinate.latitude)
+        print(locationAnnotation!.coordinate.longitude)
+        
+        self.nameTextField.text = location?.name
+        self.introductionTextView.text = location?.introduction
         
         if (location!.image != "") {
             if Int(location!.image!) != nil {
@@ -63,23 +73,29 @@ class EditLocationViewController: UIViewController, UIGestureRecognizerDelegate,
             let introduction = introductionTextView.text!
             let latitude = locationAnnotation!.coordinate.latitude
             let longitude = locationAnnotation!.coordinate.longitude
-            let image = imageView.image
-            let date = UInt(Date().timeIntervalSince1970)
-            var data = Data()
-            data = image!.jpegData(compressionQuality: 0.8)!
-            let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-            let url = NSURL(fileURLWithPath: path)
-            if let pathComponent = url.appendingPathComponent("\(date)") {
-                let filePath = pathComponent.path
-                let fileManager = FileManager.default
-                fileManager.createFile(atPath: filePath, contents: data, attributes: nil)
-            }
             
+            if imageChanged {
+                let image = imageView.image
+                let date = UInt(Date().timeIntervalSince1970)
+                var data = Data()
+                data = image!.jpegData(compressionQuality: 0.8)!
+                let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+                let url = NSURL(fileURLWithPath: path)
+                if let pathComponent = url.appendingPathComponent("\(date)") {
+                    let filePath = pathComponent.path
+                    let fileManager = FileManager.default
+                    fileManager.createFile(atPath: filePath, contents: data, attributes: nil)
+                }
+                location?.image = String(date)
+            }
+            location?.name = name
+            location?.introduction = introduction
+            location?.latitude = latitude
+            location?.longitude = longitude
             //            let location = Location(name: name, introduction: introduction, latitude: latitude, longitude: longitude, image: image)
             //            let _ = locationDelegate!.addLocation(newLocation: location)
-            let _ = databaseController!.
-            print("added")
-            updateLocationDelegate?.updateLocation(location: location!)
+            databaseController?.updateLocation(location: location!)
+            print("updated")
             self.dismiss(animated: true, completion: nil)
             return
         }
@@ -135,6 +151,7 @@ class EditLocationViewController: UIViewController, UIGestureRecognizerDelegate,
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[.originalImage] as? UIImage {
             imageView.image = pickedImage
+            self.imageChanged = true
         }
         dismiss(animated: true, completion: nil)
     }

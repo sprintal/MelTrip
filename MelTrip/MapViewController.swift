@@ -168,12 +168,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     //Modified from https://stackoverflow.com/a/41187788
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        let detailViewController = self.storyboard?.instantiateViewController(withIdentifier: "detailViewController") as! DetailViewController
-        let index = locationAnnotations.firstIndex(of: view.annotation as! LocationAnnotation)
-        detailViewController.location = allLocations[index!]
-        self.present(detailViewController, animated: true, completion: nil)
-    }
+//    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+//        let detailViewController = self.storyboard?.instantiateViewController(withIdentifier: "detailViewController") as! DetailViewController
+//        let index = locationAnnotations.firstIndex(of: view.annotation as! LocationAnnotation)
+//        detailViewController.location = allLocations[index!]
+//        self.present(detailViewController, animated: true, completion: nil)
+//    }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if !(annotation is LocationAnnotation) {
@@ -198,13 +198,25 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             pinImage.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
             let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
             anView?.image = resizedImage
-            let subtitleView = UIButton()
-            subtitleView.titleLabel?.text = "click"
-            anView?.rightCalloutAccessoryView = subtitleView
+//            let subtitleView = UIButton()
+//            subtitleView.titleLabel?.text = "click"
+//            anView?.rightCalloutAccessoryView = subtitleView
+            var button = UIButton(type: .detailDisclosure)
+            anView?.rightCalloutAccessoryView = button
             anView!.canShowCallout = true
             anView!.isEnabled = true
         }
         return anView
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView {
+            // Modified from https://stackoverflow.com/a/41187788
+            let detailViewController = self.storyboard?.instantiateViewController(withIdentifier: "detailViewController") as! DetailViewController
+            let index = locationAnnotations.firstIndex(of: view.annotation as! LocationAnnotation)
+            detailViewController.location = allLocations[index!]
+            self.present(detailViewController, animated: true, completion: nil)
+        }
     }
     
     func loadImageData(fileName: String) -> UIImage? {

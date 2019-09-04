@@ -26,7 +26,7 @@ protocol DatabaseListener: AnyObject {
 protocol DatabaseProtocol: AnyObject {
 //    var defaultLocation
     func addLocation(name: String, introduction: String, latitude: Double, longtude: Double, image: String) -> Location
-    func updateLocation(locatoin: Location)
+    func updateLocation(location: Location)
     func deleteLocation(location: Location)
     func addListener(listener: DatabaseListener)
     func removeListener(listener: DatabaseListener)
