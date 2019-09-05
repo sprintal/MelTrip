@@ -42,6 +42,7 @@
 		FE30E118231D2E5100C62946 /* CreateLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLocationViewController.swift; sourceTree = "<group>"; };
 		FE30E11A231D2E7000C62946 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		FE30E11C231D2E8E00C62946 /* AddLocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationDelegate.swift; sourceTree = "<group>"; };
+		FE65543F2321159000099A11 /* St Patrick's Cathedral.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "St Patrick's Cathedral.gpx"; path = "../../../../Users/kmen0004/Downloads/St Patrick's Cathedral.gpx"; sourceTree = "<group>"; };
 		FE681DB8232001CF00655967 /* ChooseLocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseLocationDelegate.swift; sourceTree = "<group>"; };
 		FE681DBA23202B0900655967 /* UpdateLocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateLocationDelegate.swift; sourceTree = "<group>"; };
 		FE681DBC23202C3C00655967 /* EditLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLocationViewController.swift; sourceTree = "<group>"; };
@@ -73,6 +74,7 @@
 		FE30E0F3231D2D6F00C62946 = {
 			isa = PBXGroup;
 			children = (
+				FE65543F2321159000099A11 /* St Patrick's Cathedral.gpx */,
 				FEF96201231DDA43001E7BC8 /* Chinese Museum.gpx */,
 				FEF96200231DD8FA001E7BC8 /* Melbourne Museum.gpx */,
 				FEF961FF231DD8FA001E7BC8 /* Old Melbourne Gaol.gpx */,
@@ -386,7 +388,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Monash.MelTrip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -404,7 +406,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Monash.MelTrip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

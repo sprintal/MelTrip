@@ -12,8 +12,6 @@ import CoreData
 class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsControllerDelegate {
     var listeners = MulticastDelegate<DatabaseListener>()
     var persistantContainer: NSPersistentContainer
-    
-    // Results
     var allLocationsFetchedResultsController: NSFetchedResultsController<Location>?
     
     override init() {
@@ -41,6 +39,15 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         }
     }
     
+    /// Add a location to database
+    ///
+    /// - Parameters:
+    ///   - name: Name of the location
+    ///   - introduction: Introduction of the location
+    ///   - latitude: Latitude of the location
+    ///   - longtude: Longitude of the location
+    ///   - image: File name of the image representing the location
+    /// - Returns: A NSManaged object Location
     func addLocation(name: String, introduction: String, latitude: Double, longtude: Double, image: String) -> Location {
         let location = NSEntityDescription.insertNewObject(forEntityName: "Location", into: persistantContainer.viewContext) as! Location
         location.name = name
@@ -53,14 +60,15 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         return location
     }
     
+    /// Update a exsiting location's information
+    ///
+    /// - Parameter location: The NSManaged object representing the location
     func updateLocation(location: Location) {
-//        persistantContainer.viewContext.sa
         let managedObjectContext = self.persistantContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Location")
         fetchRequest.predicate = NSPredicate(format: "createTime == %@", location.createTime!)
         let result = try? managedObjectContext.fetch(fetchRequest)
         let resultData = result as! [Location]
-        print(resultData[0].name)
         resultData[0].setValue(location.name, forKey: "name")
         resultData[0].setValue(location.introduction, forKey: "introduction")
         resultData[0].setValue(location.latitude, forKey: "latitude")
@@ -74,6 +82,9 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         }
     }
     
+    /// Delete a location from database
+    ///
+    /// - Parameter location: The NSManaged object representing the location
     func deleteLocation(location: Location) {
         persistantContainer.viewContext.delete(location)
         saveContext()
@@ -123,6 +134,7 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         }
     }
     
+    /// Create default entries
     func createDefaultEntries() {
         let _ = addLocation(name: "Old Melbourne Gaol", introduction: "Step back in time to Melbourne’s most feared destination since 1845, Old Melbourne Gaol.", latitude: -37.8080028, longtude: 144.9629102, image: "Old Melbourne Gaol")
         let _ = addLocation(name: "Melbourne Museum", introduction: "A visit to Melbourne Museum is a rich, surprising insight into life in Victoria.", latitude: -37.8031888, longtude: 144.9695788, image: "Melbourne Museum")

@@ -30,9 +30,6 @@ class LocationTableViewController: UITableViewController, UISearchResultsUpdatin
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         databaseController = appDelegate.databaseController
         
-//        createDefaultLocations()
-//        filteredLocations = allLocations
-        
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -99,18 +96,13 @@ class LocationTableViewController: UITableViewController, UISearchResultsUpdatin
         } else {
             cell.locationImage.image = UIImage(named: "placeholder")
         }
-        
         // Configure the cell...
-
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // TODO
         tableView.deselectRow(at: indexPath, animated: true)
-//        let mapViewController = MapViewController()
-//        let index = self.allLocations.firstIndex(of: filteredLocations[indexPath.row])
-//        mapViewController.focusOn(index: index!)
         chooseLocationDelegate?.centerOnChosen(index: allLocations.firstIndex(of: filteredLocations[indexPath.row])!)
         navigationController?.popViewController(animated: true)
         return
@@ -126,10 +118,6 @@ class LocationTableViewController: UITableViewController, UISearchResultsUpdatin
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-//            let locationToBeDeleted = filteredLocations[indexPath.row]
-//            filteredLocations.remove(at: indexPath.row)
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//            databaseController?.deleteLocation(location: locationToBeDeleted)
             databaseController?.deleteLocation(location: filteredLocations[indexPath.row])
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -165,32 +153,9 @@ class LocationTableViewController: UITableViewController, UISearchResultsUpdatin
     }
     */
     
-//    func addLocation(newLocation: Location) -> Bool {
-//        allLocations.append(newLocation)
-//        filteredLocations.append(newLocation)
-//        tableView.beginUpdates()
-//        tableView.insertRows(at: [IndexPath(row: filteredLocations.count - 1, section: 0)], with: .automatic)
-//        tableView.endUpdates()
-//        tableView.reloadSections([0], with: .automatic)
-//        return true
-//    }
-    
-//    func createDefaultLocations() {
-////        let mapViewController = tabBarController?.children[0] as! MapViewController
-//
-//        var location = Location(name: "Old Melbourne Gaol", introduction: "Step back in time to Melbourne’s most feared destination since 1845, Old Melbourne Gaol.", latitude: -37.8080028, longitude: 144.9629102, image: "")
-//        allLocations.append(location)
-////        mapViewController.mapView.addAnnotation(location)
-//
-//        location = Location(name: "Melbourne Museum", introduction: "A visit to Melbourne Museum is a rich, surprising insight into life in Victoria.", latitude: -37.8031888, longitude: 144.9695788, image: "")
-//        allLocations.append(location)
-////        mapViewController.mapView.addAnnotation(location)
-//
-//        location = Location(name: "Her Majesty's Theatre", introduction: "Her Majesty's Theatre, one of Melbourne's most iconic venues for live performance, has been entertaining Australia since 1886.", latitude: -37.8109121, longitude: 144.9675666, image: "")
-//        allLocations.append(location)
-////        mapViewController.mapView.addAnnotation(location)
-//    }
-    
+    /// Alphabatically sort locations on bar button item click
+    ///
+    /// - Parameter sender:
     @IBAction func barButton(_ sender: Any) {
         if alphabeticalFlag == 0 {
             filteredLocations = filteredLocations.sorted { $0.name! < $1.name! }
@@ -202,9 +167,12 @@ class LocationTableViewController: UITableViewController, UISearchResultsUpdatin
             barButton.title = "A-Z"
         }
         tableView.reloadData()
-        print("tapped")
     }
     
+    /// Load image from storage
+    ///
+    /// - Parameter fileName: The location's image's file name
+    /// - Returns: The image of the location
     func loadImageData(fileName: String) -> UIImage? {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         let url = NSURL(fileURLWithPath: path)

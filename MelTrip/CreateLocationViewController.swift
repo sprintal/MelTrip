@@ -11,23 +11,20 @@ import MapKit
 import CoreMotion
 
 class CreateLocationViewController: UIViewController, UIGestureRecognizerDelegate, MKMapViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITextFieldDelegate {
-//    weak var locationDelegate: AddLocationDelegate?
     weak var databaseController: DatabaseProtocol?
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var introductionTextView: UITextView!
     @IBOutlet weak var mapView: MKMapView!
-    //    @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var imageView: UIImageView!
-    //    @IBOutlet weak var introductionTextField: UITextField!
-//    @IBOutlet weak var mapView: MKMapView!
     var locationAnnotation: MKPointAnnotation?
-//    let motionManager: CMMotionManager = CMMotionManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Set the apperance of text view similar to text field
         introductionTextView.layer.borderWidth = 1
         introductionTextView.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         introductionTextView.layer.cornerRadius = 5.0
+        
         // Center the map to Melbourne CBD
         // Inspired from https://hangge.com/blog/cache/detail_1878.html
         self.mapView.delegate = self
@@ -87,11 +84,8 @@ class CreateLocationViewController: UIViewController, UIGestureRecognizerDelegat
                 let fileManager = FileManager.default
                 fileManager.createFile(atPath: filePath, contents: data, attributes: nil)
             }
-            
-//            let location = Location(name: name, introduction: introduction, latitude: latitude, longitude: longitude, image: image)
-//            let _ = locationDelegate!.addLocation(newLocation: location)
+
             let _ = databaseController!.addLocation(name: name, introduction: introduction, latitude: latitude, longtude: longitude, image: String(date))
-            print("added")
             navigationController?.popViewController(animated: true)
             return
         }
@@ -117,8 +111,10 @@ class CreateLocationViewController: UIViewController, UIGestureRecognizerDelegat
         self.present(alertController, animated: true, completion: nil)
     }
     
-    // Show annotation when tap on map
-    // Modified from https://stackoverflow.com/a/53885008
+    /// Show annotation when tap on map
+    /// Modified from https://stackoverflow.com/a/53885008
+    ///
+    /// - Parameter sender:
     @objc func handleTap(sender: UITapGestureRecognizer) {
         print("tapped")
         if locationAnnotation != nil {
@@ -129,7 +125,10 @@ class CreateLocationViewController: UIViewController, UIGestureRecognizerDelegat
         addAnnotation(location: locationOnMap)
     }
     
-    // Modified from https://stackoverflow.com/a/53885008
+    /// Add annotation of a location in map view
+    /// Modified from https://stackoverflow.com/a/53885008
+    ///
+    /// - Parameter location:
     func addAnnotation(location: CLLocationCoordinate2D) {
         locationAnnotation = MKPointAnnotation()
         locationAnnotation!.coordinate = location
@@ -146,12 +145,11 @@ class CreateLocationViewController: UIViewController, UIGestureRecognizerDelegat
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        print("Error when getting the image")
         dismiss(animated: true, completion: nil)	
     }
     
-    // Limit the number of characters
-    // Code from https://www.hackingwithswift.com/example-code/uikit/how-to-limit-the-number-of-characters-in-a-uitextfield-or-uitextview
+    /// Limit the number of characters
+    /// Code from https://www.hackingwithswift.com/example-code/uikit/how-to-limit-the-number-of-characters-in-a-uitextfield-or-uitextview
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let currentText = textView.text ?? ""
         guard let stringRange = Range(range, in: currentText) else {
@@ -161,6 +159,8 @@ class CreateLocationViewController: UIViewController, UIGestureRecognizerDelegat
         return changedText.count <= 300
     }
     
+    /// Limit the number of characters
+    /// Code from https://www.hackingwithswift.com/example-code/uikit/how-to-limit-the-number-of-characters-in-a-uitextfield-or-uitextview
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = textField.text ?? ""
         guard let stringRange = Range(range, in: currentText) else {

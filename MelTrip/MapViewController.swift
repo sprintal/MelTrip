@@ -70,21 +70,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
-    // TODO
-//    func focusOn(index: Int) {
-//        print(index)
-//        let annotation = locationAnnotations[index]
-//        mapView.selectAnnotation(annotation, animated: true)
-//
-//        let zoomRegion = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
-//        mapView.setRegion(mapView.regionThatFits(zoomRegion), animated: true)
-//    }
-    
+    /// Center on current location on button click
     @IBAction func currentLocation(_ sender: Any) {
-        guard let location = currentLocation else {
-            return
-        }
-        
+        guard let location = currentLocation else { return }
         let zoomRegion = MKCoordinateRegion(center: location, latitudinalMeters: 500, longitudinalMeters: 500)
         mapView.setRegion(mapView.regionThatFits(zoomRegion), animated: true)
     }
@@ -101,6 +89,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
 
+    /// Add all locations' annotaions in map view
+    ///
+    /// - Parameter locations: A list of Location objects
     func updateAnnotations(locations: [Location]) {
         self.locationAnnotations = []
         for location in locations {
@@ -108,12 +99,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         self.mapView.removeAnnotations(mapView.annotations)
         self.mapView.addAnnotations(self.locationAnnotations)
-//        for locationAnnotation in self.locationAnnotations {
-//            let anView = mapView.view(for: locationAnnotation)
-//                anView.image = #imageLiteral(resourceName: "Old Melbourne Gaol")
-//        }
     }
     
+    /// Add all locations' geo fences
     func updateGeoLocations() {
         for geoLocation in self.geoLocations {
             locationManager.stopMonitoring(for: geoLocation)
@@ -130,50 +118,44 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        // Check the state of the application
+        // modified from https://stackoverflow.com/a/38972081
         let state = UIApplication.shared.applicationState
         if state == .active {
             let alert = UIAlertController(title: "Movement detected", message: "You entered \(region.identifier)", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         } else if state == .background || state == .inactive {
+            // Push local notification
+            // Learned from https://www.youtube.com/watch?v=QwolFT5QSk0
             let content = UNMutableNotificationContent()
             content.title = "Movement detected"
             content.body = "Welcome to " + region.identifier
             content.sound = UNNotificationSound.default
-            
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
-            let request = UNNotificationRequest(identifier: "geoFence", content: content, trigger: trigger)
-            
+            let request = UNNotificationRequest(identifier: "geoFence", content: content, trigger: nil)
             UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        // Check the state of the application
+        // modified from https://stackoverflow.com/a/38972081
         let state = UIApplication.shared.applicationState
         if state == .active {
             let alert = UIAlertController(title: "Movement detected", message: "You left \(region.identifier)", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         } else if state == .background || state == .inactive {
+            // Push local notification
+            // Learned from https://www.youtube.com/watch?v=QwolFT5QSk0
             let content = UNMutableNotificationContent()
             content.title = "Movement detected"
             content.body = "You left " + region.identifier
             content.sound = UNNotificationSound.default
-            
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
-            let request = UNNotificationRequest(identifier: "geoFence", content: content, trigger: trigger)
-            
+            let request = UNNotificationRequest(identifier: "geoFence", content: content, trigger: nil)
             UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         }
     }
-    
-    //Modified from https://stackoverflow.com/a/41187788
-//    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-//        let detailViewController = self.storyboard?.instantiateViewController(withIdentifier: "detailViewController") as! DetailViewController
-//        let index = locationAnnotations.firstIndex(of: view.annotation as! LocationAnnotation)
-//        detailViewController.location = allLocations[index!]
-//        self.present(detailViewController, animated: true, completion: nil)
-//    }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if !(annotation is LocationAnnotation) {
@@ -182,6 +164,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let resueId = annotation.title!
         var anView = mapView.dequeueReusableAnnotationView(withIdentifier: resueId!)
         if anView == nil {
+            // Change the icon of annotation to customized image
+            // Modified from https://stackoverflow.com/a/33272038
             anView = MKAnnotationView(annotation: annotation, reuseIdentifier: resueId)
             let size = CGSize(width: 40, height: 40)
             let location: Location = allLocations[locationAnnotations.firstIndex(of: annotation as! LocationAnnotation)!]
@@ -198,10 +182,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             pinImage.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
             let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
             anView?.image = resizedImage
-//            let subtitleView = UIButton()
-//            subtitleView.titleLabel?.text = "click"
-//            anView?.rightCalloutAccessoryView = subtitleView
-            var button = UIButton(type: .detailDisclosure)
+            let button = UIButton(type: .detailDisclosure)
             anView?.rightCalloutAccessoryView = button
             anView!.canShowCallout = true
             anView!.isEnabled = true
@@ -209,6 +190,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         return anView
     }
     
+    /// Open detail page on button click
+    /// Modified from https://stackoverflow.com/a/28226174
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             // Modified from https://stackoverflow.com/a/41187788
