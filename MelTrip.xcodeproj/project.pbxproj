@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		FE30E100231D2D6F00C62946 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE30E0FF231D2D6F00C62946 /* AppDelegate.swift */; };
-		FE30E102231D2D6F00C62946 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE30E101231D2D6F00C62946 /* ViewController.swift */; };
 		FE30E105231D2D6F00C62946 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE30E103231D2D6F00C62946 /* Main.storyboard */; };
 		FE30E10A231D2D7100C62946 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE30E109231D2D7100C62946 /* Assets.xcassets */; };
 		FE30E10D231D2D7100C62946 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE30E10B231D2D7100C62946 /* LaunchScreen.storyboard */; };
@@ -16,6 +15,8 @@
 		FE30E119231D2E5100C62946 /* CreateLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE30E118231D2E5100C62946 /* CreateLocationViewController.swift */; };
 		FE30E11B231D2E7000C62946 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE30E11A231D2E7000C62946 /* LocationTableViewCell.swift */; };
 		FE30E11D231D2E8E00C62946 /* AddLocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE30E11C231D2E8E00C62946 /* AddLocationDelegate.swift */; };
+		FE5B05A1232135A300BD899F /* UITextViewAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B05A0232135A300BD899F /* UITextViewAdditions.swift */; };
+		FE5B05A32321426300BD899F /* ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5B05A22321426300BD899F /* ColorScheme.swift */; };
 		FE681DB9232001CF00655967 /* ChooseLocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE681DB8232001CF00655967 /* ChooseLocationDelegate.swift */; };
 		FE681DBB23202B0900655967 /* UpdateLocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE681DBA23202B0900655967 /* UpdateLocationDelegate.swift */; };
 		FE681DBD23202C3C00655967 /* EditLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE681DBC23202C3C00655967 /* EditLocationViewController.swift */; };
@@ -33,7 +34,6 @@
 /* Begin PBXFileReference section */
 		FE30E0FC231D2D6F00C62946 /* MelTrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MelTrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE30E0FF231D2D6F00C62946 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FE30E101231D2D6F00C62946 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FE30E104231D2D6F00C62946 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FE30E109231D2D7100C62946 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FE30E10C231D2D7100C62946 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -42,7 +42,8 @@
 		FE30E118231D2E5100C62946 /* CreateLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLocationViewController.swift; sourceTree = "<group>"; };
 		FE30E11A231D2E7000C62946 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		FE30E11C231D2E8E00C62946 /* AddLocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationDelegate.swift; sourceTree = "<group>"; };
-		FE65543F2321159000099A11 /* St Patrick's Cathedral.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "St Patrick's Cathedral.gpx"; path = "../../../../Users/kmen0004/Downloads/St Patrick's Cathedral.gpx"; sourceTree = "<group>"; };
+		FE5B05A0232135A300BD899F /* UITextViewAdditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextViewAdditions.swift; sourceTree = "<group>"; };
+		FE5B05A22321426300BD899F /* ColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScheme.swift; sourceTree = "<group>"; };
 		FE681DB8232001CF00655967 /* ChooseLocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseLocationDelegate.swift; sourceTree = "<group>"; };
 		FE681DBA23202B0900655967 /* UpdateLocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateLocationDelegate.swift; sourceTree = "<group>"; };
 		FE681DBC23202C3C00655967 /* EditLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLocationViewController.swift; sourceTree = "<group>"; };
@@ -74,7 +75,6 @@
 		FE30E0F3231D2D6F00C62946 = {
 			isa = PBXGroup;
 			children = (
-				FE65543F2321159000099A11 /* St Patrick's Cathedral.gpx */,
 				FEF96201231DDA43001E7BC8 /* Chinese Museum.gpx */,
 				FEF96200231DD8FA001E7BC8 /* Melbourne Museum.gpx */,
 				FEF961FF231DD8FA001E7BC8 /* Old Melbourne Gaol.gpx */,
@@ -97,7 +97,6 @@
 				FEF961A6231D73A8001E7BC8 /* Database */,
 				FEF9619B231D714B001E7BC8 /* DataMoidel */,
 				FE30E0FF231D2D6F00C62946 /* AppDelegate.swift */,
-				FE30E101231D2D6F00C62946 /* ViewController.swift */,
 				FE30E103231D2D6F00C62946 /* Main.storyboard */,
 				FE30E109231D2D7100C62946 /* Assets.xcassets */,
 				FE30E10B231D2D7100C62946 /* LaunchScreen.storyboard */,
@@ -112,6 +111,8 @@
 				FE681DB8232001CF00655967 /* ChooseLocationDelegate.swift */,
 				FE681DBA23202B0900655967 /* UpdateLocationDelegate.swift */,
 				FE681DBC23202C3C00655967 /* EditLocationViewController.swift */,
+				FE5B05A0232135A300BD899F /* UITextViewAdditions.swift */,
+				FE5B05A22321426300BD899F /* ColorScheme.swift */,
 			);
 			path = MelTrip;
 			sourceTree = "<group>";
@@ -220,16 +221,17 @@
 				FEF961AA231D7539001E7BC8 /* CoreDataController.swift in Sources */,
 				FEF961A5231D7281001E7BC8 /* Location+CoreDataProperties.swift in Sources */,
 				FE30E11B231D2E7000C62946 /* LocationTableViewCell.swift in Sources */,
-				FE30E102231D2D6F00C62946 /* ViewController.swift in Sources */,
 				FEF961F8231DA349001E7BC8 /* MapViewController.swift in Sources */,
 				FEF961A8231D73C1001E7BC8 /* DatabaseProtocol.swift in Sources */,
 				FE681DBB23202B0900655967 /* UpdateLocationDelegate.swift in Sources */,
 				FE30E117231D2E0F00C62946 /* LocationTableViewController.swift in Sources */,
+				FE5B05A1232135A300BD899F /* UITextViewAdditions.swift in Sources */,
 				FEF961AC231D7FAC001E7BC8 /* MulticastDelegate.swift in Sources */,
 				FE30E100231D2D6F00C62946 /* AppDelegate.swift in Sources */,
 				FE681DBD23202C3C00655967 /* EditLocationViewController.swift in Sources */,
 				FEF961FA231DA3A6001E7BC8 /* LocationAnnotation.swift in Sources */,
 				FE681DB9232001CF00655967 /* ChooseLocationDelegate.swift in Sources */,
+				FE5B05A32321426300BD899F /* ColorScheme.swift in Sources */,
 				FEF961FC231DBDF6001E7BC8 /* DetailViewController.swift in Sources */,
 				FEF961A4231D7281001E7BC8 /* Location+CoreDataClass.swift in Sources */,
 				FE30E119231D2E5100C62946 /* CreateLocationViewController.swift in Sources */,
@@ -378,7 +380,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MelTrip/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -387,6 +389,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Monash.MelTrip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -396,7 +399,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MelTrip/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -405,6 +408,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Monash.MelTrip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

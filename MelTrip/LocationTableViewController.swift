@@ -40,6 +40,10 @@ class LocationTableViewController: UITableViewController, UISearchResultsUpdatin
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        UIView.animate(withDuration: 0.5) {
+            self.navigationController?.navigationBar.barTintColor = UIColor.white
+            self.navigationController?.navigationBar.layoutIfNeeded()
+        }
         super.viewWillAppear(animated)
         databaseController?.addListener(listener: self)
     }
@@ -96,6 +100,21 @@ class LocationTableViewController: UITableViewController, UISearchResultsUpdatin
         } else {
             cell.locationImage.image = UIImage(named: "placeholder")
         }
+        
+        let backgroundColor: UIColor
+        switch location.type {
+        case 0:
+            backgroundColor = UIColor.defaultBackgroundColor
+        case 1:
+            backgroundColor = UIColor.museumBackgroundColor
+        case 2:
+            backgroundColor = UIColor.parkBackgroundColor
+        case 3:
+            backgroundColor = UIColor.historicalBackgroundColor
+        default:
+            backgroundColor = UIColor.white
+        }
+        cell.backgroundColor = backgroundColor
         // Configure the cell...
         return cell
     }

@@ -20,6 +20,8 @@ class EditLocationViewController: UIViewController, UIGestureRecognizerDelegate,
     var locationAnnotation: MKPointAnnotation?
     weak var updateLocationDelegate: UpdateLocationDelegate?
     var imageChanged = false
+    @IBOutlet weak var typeSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var takePhotoButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +41,11 @@ class EditLocationViewController: UIViewController, UIGestureRecognizerDelegate,
         
         self.nameTextField.text = location?.name
         self.introductionTextView.text = location?.introduction
+        self.typeSegmentedControl.selectedSegmentIndex = Int(location!.type)
+        
+        // Add Done button to toolbar
+        // From http://www.swiftdevcenter.com/uitextview-dismiss-keyboard-swift/
+        self.introductionTextView.addDoneButton(title: "Done", target: self, selector: #selector(tapDone(sender:)))
         
         if (location!.image != "") {
             if Int(location!.image!) != nil {
@@ -61,6 +68,8 @@ class EditLocationViewController: UIViewController, UIGestureRecognizerDelegate,
         let gestureRecoginzer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         gestureRecoginzer.delegate = self
         mapView.addGestureRecognizer(gestureRecoginzer)
+        segmentedControlChanged()
+        self.typeSegmentedControl.addTarget(self, action: #selector(segmentedControlChanged), for: .valueChanged)
     }
     
     @IBAction func back(_ sender: Any) {
@@ -73,6 +82,7 @@ class EditLocationViewController: UIViewController, UIGestureRecognizerDelegate,
             let introduction = introductionTextView.text!
             let latitude = locationAnnotation!.coordinate.latitude
             let longitude = locationAnnotation!.coordinate.longitude
+            let type = Int16(typeSegmentedControl.selectedSegmentIndex)
             
             if imageChanged {
                 let image = imageView.image
@@ -92,6 +102,7 @@ class EditLocationViewController: UIViewController, UIGestureRecognizerDelegate,
             location?.introduction = introduction
             location?.latitude = latitude
             location?.longitude = longitude
+            location?.type = type
             //            let location = Location(name: name, introduction: introduction, latitude: latitude, longitude: longitude, image: image)
             //            let _ = locationDelegate!.addLocation(newLocation: location)
             databaseController?.updateLocation(location: location!)
@@ -198,6 +209,46 @@ class EditLocationViewController: UIViewController, UIGestureRecognizerDelegate,
             image = UIImage(data: fileData!)
         }
         return image
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return textField.resignFirstResponder()
+    }
+    
+    /// Dismiss keyboard on Done button click
+    /// From http://www.swiftdevcenter.com/uitextview-dismiss-keyboard-swift/
+    ///
+    /// - Parameter sender:
+    @objc func tapDone(sender: Any) {
+        self.view.endEditing(true)
+    }
+    
+    @objc func segmentedControlChanged() {
+        let value = self.typeSegmentedControl.selectedSegmentIndex
+        switch value {
+        case 0:
+            UIView.animate(withDuration: 0.5) {
+                self.typeSegmentedControl.tintColor = UIColor.defaultColor
+                self.takePhotoButton.tintColor = UIColor.defaultColor
+            }
+        case 1:
+            UIView.animate(withDuration: 0.5) {
+                self.typeSegmentedControl.tintColor = UIColor.museumColor
+                self.takePhotoButton.tintColor = UIColor.museumColor
+            }
+        case 2:
+            UIView.animate(withDuration: 0.5) {
+                self.typeSegmentedControl.tintColor = UIColor.parkColor
+                self.takePhotoButton.tintColor = UIColor.parkColor
+            }
+        case 3:
+            UIView.animate(withDuration: 0.5) {
+                self.typeSegmentedControl.tintColor = UIColor.historicalColor
+                self.takePhotoButton.tintColor = UIColor.historicalColor
+            }
+        default:
+            return
+        }
     }
     
     /*

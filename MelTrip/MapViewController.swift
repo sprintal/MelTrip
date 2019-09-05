@@ -23,7 +23,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         databaseController = appDelegate.databaseController
         // Do any additional setup after loading the view.
@@ -95,7 +94,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func updateAnnotations(locations: [Location]) {
         self.locationAnnotations = []
         for location in locations {
-            self.locationAnnotations.append(LocationAnnotation(title: location.name!, subtitle: location.introduction!, latitude: location.latitude, longitude: location.longitude))
+            self.locationAnnotations.append(LocationAnnotation(title: location.name!, subtitle: location.introduction!, latitude: location.latitude, longitude: location.longitude, type: location.type))
         }
         self.mapView.removeAnnotations(mapView.annotations)
         self.mapView.addAnnotations(self.locationAnnotations)
@@ -162,31 +161,51 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             return nil
         }
         let resueId = annotation.title!
-        var anView = mapView.dequeueReusableAnnotationView(withIdentifier: resueId!)
-        if anView == nil {
+        var anView = MKMarkerAnnotationView()
+        if let dequedView = mapView.dequeueReusableAnnotationView(withIdentifier:resueId!) as? MKMarkerAnnotationView {
+            anView = dequedView
+        }
+        else {
+            anView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: resueId)
+        }
+
             // Change the icon of annotation to customized image
             // Modified from https://stackoverflow.com/a/33272038
-            anView = MKAnnotationView(annotation: annotation, reuseIdentifier: resueId)
-            let size = CGSize(width: 40, height: 40)
-            let location: Location = allLocations[locationAnnotations.firstIndex(of: annotation as! LocationAnnotation)!]
-            var pinImage: UIImage
-            if Int(location.image!) == nil {
-                let fileName = location.image!
-                pinImage = UIImage(named: fileName)!
-            } else {
-                let fileName = location.image
-                print(location)
-                pinImage = loadImageData(fileName: fileName!)!
-            }
-            UIGraphicsBeginImageContext(size)
-            pinImage.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
-            let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
-            anView?.image = resizedImage
-            let button = UIButton(type: .detailDisclosure)
-            anView?.rightCalloutAccessoryView = button
-            anView!.canShowCallout = true
-            anView!.isEnabled = true
+        anView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: resueId)
+            
+        let location: Location = allLocations[locationAnnotations.firstIndex(of: annotation as! LocationAnnotation)!]
+        let size = CGSize(width: 40, height: 40)
+        var pinImage: UIImage
+        if Int(location.image!) == nil {
+            let fileName = location.image!
+            pinImage = UIImage(named: fileName)!
+        } else {
+            let fileName = location.image
+            print(location)
+            pinImage = loadImageData(fileName: fileName!)!
         }
+        UIGraphicsBeginImageContext(size)
+        pinImage.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        var backgroundColor: UIColor
+        switch location.type {
+        case 0:
+            backgroundColor = UIColor.defaultBackgroundColor
+        case 1:
+            backgroundColor = UIColor.museumBackgroundColor
+        case 2:
+            backgroundColor = UIColor.parkBackgroundColor
+        case 3:
+            backgroundColor = UIColor.historicalBackgroundColor
+        default:
+            backgroundColor = UIColor.red
+        }
+        anView.markerTintColor = backgroundColor
+        let button = UIButton(type: .detailDisclosure)
+        anView.rightCalloutAccessoryView = button
+        anView.canShowCallout = true
+        anView.leftCalloutAccessoryView = UIImageView(image: resizedImage)
+        anView.isEnabled = true
         return anView
     }
     

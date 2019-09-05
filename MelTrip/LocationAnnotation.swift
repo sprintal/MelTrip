@@ -13,10 +13,12 @@ class LocationAnnotation: NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
     var title: String?
     var subtitle: String?
+    var type: Int16
     
-    init(title: String, subtitle: String, latitude: Double, longitude: Double) {
+    init(title: String, subtitle: String, latitude: Double, longitude: Double, type: Int16) {
         self.title = title
         self.subtitle = subtitle
         self.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        self.type = type
     }
 }

@@ -17,6 +17,8 @@ class CreateLocationViewController: UIViewController, UIGestureRecognizerDelegat
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var imageView: UIImageView!
     var locationAnnotation: MKPointAnnotation?
+    @IBOutlet weak var typeSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var takePtotoButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +46,15 @@ class CreateLocationViewController: UIViewController, UIGestureRecognizerDelegat
         let gestureRecoginzer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         gestureRecoginzer.delegate = self
         mapView.addGestureRecognizer(gestureRecoginzer)
+        
+        // Add Done button to toolbar
+        // From http://www.swiftdevcenter.com/uitextview-dismiss-keyboard-swift/
+        self.introductionTextView.addDoneButton(title: "Done", target: self, selector: #selector(tapDone(sender:)))
+        
+        self.typeSegmentedControl.addTarget(self, action: #selector(segmentedControlChanged), for: .valueChanged)
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.defaultColor
+        segmentedControlChanged()
     }
     
     @IBAction func takePhoto(_ sender: Any) {
@@ -84,9 +95,13 @@ class CreateLocationViewController: UIViewController, UIGestureRecognizerDelegat
                 let fileManager = FileManager.default
                 fileManager.createFile(atPath: filePath, contents: data, attributes: nil)
             }
-
-            let _ = databaseController!.addLocation(name: name, introduction: introduction, latitude: latitude, longtude: longitude, image: String(date))
+            let type = Int16(typeSegmentedControl!.selectedSegmentIndex)
+            let _ = databaseController!.addLocation(name: name, introduction: introduction, latitude: latitude, longtude: longitude, image: String(date), type: type)
             navigationController?.popViewController(animated: true)
+            UIView.animate(withDuration: 0.5) {
+                self.navigationController?.navigationBar.barTintColor = UIColor.white
+                self.navigationController?.navigationBar.layoutIfNeeded()
+            }
             return
         }
         var errorMsg = "Please ensure all info has been provided!"
@@ -168,6 +183,54 @@ class CreateLocationViewController: UIViewController, UIGestureRecognizerDelegat
         }
         let changedText = currentText.replacingCharacters(in: stringRange, with: string)
         return changedText.count <= 100
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return textField.resignFirstResponder()
+    }
+    
+    /// Dismiss keyboard on Done button click
+    /// From http://www.swiftdevcenter.com/uitextview-dismiss-keyboard-swift/
+    ///
+    /// - Parameter sender:
+    @objc func tapDone(sender: Any) {
+        self.view.endEditing(true)
+    }
+    
+    @objc func segmentedControlChanged() {
+        let value = self.typeSegmentedControl.selectedSegmentIndex
+        switch value {
+        case 0:
+            UIView.animate(withDuration: 0.5) {
+                self.navigationController?.navigationBar.barTintColor = UIColor.defaultColor
+                self.typeSegmentedControl.tintColor = UIColor.defaultColor
+                self.takePtotoButton.tintColor = UIColor.defaultColor
+                self.navigationController?.navigationBar.layoutIfNeeded()
+            }
+        case 1:
+            UIView.animate(withDuration: 0.5) {
+                self.navigationController?.navigationBar.barTintColor = UIColor.museumColor
+                self.typeSegmentedControl.tintColor = UIColor.museumColor
+                self.takePtotoButton.tintColor = UIColor.museumColor
+                self.navigationController?.navigationBar.layoutIfNeeded()
+            }
+        case 2:
+            UIView.animate(withDuration: 0.5) {
+                self.navigationController?.navigationBar.barTintColor = UIColor.parkColor
+                self.typeSegmentedControl.tintColor = UIColor.parkColor
+                self.takePtotoButton.tintColor = UIColor.parkColor
+                self.navigationController?.navigationBar.layoutIfNeeded()
+            }
+        case 3:
+            UIView.animate(withDuration: 0.5) {
+                self.navigationController?.navigationBar.barTintColor = UIColor.historicalColor
+                self.typeSegmentedControl.tintColor = UIColor.historicalColor
+                self.takePtotoButton.tintColor = UIColor.historicalColor
+                self.navigationController?.navigationBar.layoutIfNeeded()
+            }
+        default:
+            return
+        }
     }
 }
 

@@ -23,4 +23,5 @@ extension Location {
     @NSManaged public var longitude: Double
     @NSManaged public var image: String?
     @NSManaged public var createTime: String?
+    @NSManaged public var type: Int16
 }

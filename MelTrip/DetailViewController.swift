@@ -34,9 +34,24 @@ class DetailViewController: UIViewController, UpdateLocationDelegate {
             imageView.image = UIImage(named: "placeholder")
         }
         mapView.removeAnnotations(mapView.annotations)
-        mapView.addAnnotation(LocationAnnotation(title: location!.name!, subtitle: location!.introduction!, latitude: location!.latitude, longitude: location!.longitude))
+        mapView.addAnnotation(LocationAnnotation(title: location!.name!, subtitle: location!.introduction!, latitude: location!.latitude, longitude: location!.longitude, type: location!.type))
         let zoomRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location!.latitude, longitude: location!.longitude), latitudinalMeters: 500, longitudinalMeters: 500)
         mapView.setRegion(mapView.regionThatFits(zoomRegion), animated: true)
+        
+        let backgroundColor: UIColor
+        switch location!.type {
+        case 0:
+            backgroundColor = UIColor.defaultBackgroundColor
+        case 1:
+            backgroundColor = UIColor.museumBackgroundColor
+        case 2:
+            backgroundColor = UIColor.parkBackgroundColor
+        case 3:
+            backgroundColor = UIColor.historicalBackgroundColor
+        default:
+            backgroundColor = UIColor.white
+        }
+        nameLabel.backgroundColor = backgroundColor
     }
     
     func loadImageData(fileName: String) -> UIImage? {
