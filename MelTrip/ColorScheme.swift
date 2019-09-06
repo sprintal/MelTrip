@@ -27,19 +27,34 @@ extension UIColor {
     }
     
     class var defaultBackgroundColor: UIColor {
-        return UIColor(red: 121/255, green: 151/255, blue: 155/255, alpha: 0.9)
+        return UIColor(red: 121/255, green: 151/255, blue: 155/255, alpha: 0.95)
     }
     
     class var parkBackgroundColor: UIColor {
-        return UIColor(red: 48/255, green: 209/255, blue: 88/255, alpha: 0.9)
+        return UIColor(red: 48/255, green: 209/255, blue: 88/255, alpha: 0.95)
     }
     
     class var historicalBackgroundColor: UIColor {
-        return UIColor(red: 255/255, green: 159/255, blue: 10/255, alpha: 0.9)
+        return UIColor(red: 255/255, green: 159/255, blue: 10/255, alpha: 0.95)
     }
     
     class var museumBackgroundColor: UIColor {
-        return UIColor(red: 255/255, green: 55/255, blue: 95/255, alpha: 0.9)
+        return UIColor(red: 255/255, green: 55/255, blue: 95/255, alpha: 0.95)
     }
 
+    class var defaultCellBackgroundColor: UIColor {
+        return UIColor(red: 121/255, green: 151/255, blue: 155/255, alpha: 0.4)
+    }
+    
+    class var parkCellBackgroundColor: UIColor {
+        return UIColor(red: 48/255, green: 209/255, blue: 88/255, alpha: 0.4)
+    }
+    
+    class var historicalCellBackgroundColor: UIColor {
+        return UIColor(red: 255/255, green: 159/255, blue: 10/255, alpha: 0.4)
+    }
+    
+    class var museumCellBackgroundColor: UIColor {
+        return UIColor(red: 255/255, green: 55/255, blue: 95/255, alpha: 0.4)
+    }
 }

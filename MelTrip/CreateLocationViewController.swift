@@ -112,7 +112,7 @@ class CreateLocationViewController: UIViewController, UIGestureRecognizerDelegat
             errorMsg.append("\n- Please enter introduction")
         }
         if (locationAnnotation == nil) {
-            errorMsg.append("\n- Please choose a locatin on the map")
+            errorMsg.append("\n- Please choose a location on the map")
         }
         if (imageView.image == nil || imageView.image == UIImage(named: "placeholder")) {
             errorMsg.append("\n- Please choose a photo for the location")
@@ -131,7 +131,6 @@ class CreateLocationViewController: UIViewController, UIGestureRecognizerDelegat
     ///
     /// - Parameter sender:
     @objc func handleTap(sender: UITapGestureRecognizer) {
-        print("tapped")
         if locationAnnotation != nil {
             self.mapView.removeAnnotation(locationAnnotation!)
         }
@@ -148,8 +147,6 @@ class CreateLocationViewController: UIViewController, UIGestureRecognizerDelegat
         locationAnnotation = MKPointAnnotation()
         locationAnnotation!.coordinate = location
         self.mapView.addAnnotation(locationAnnotation!)
-        print(locationAnnotation!.coordinate.latitude)
-        print(locationAnnotation!.coordinate.longitude)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

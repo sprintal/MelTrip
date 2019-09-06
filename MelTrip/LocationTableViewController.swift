@@ -49,7 +49,7 @@ class LocationTableViewController: UITableViewController, UISearchResultsUpdatin
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        super.viewWillDisappear(true)
         databaseController?.removeListener(listener: self)
     }
     
@@ -104,13 +104,13 @@ class LocationTableViewController: UITableViewController, UISearchResultsUpdatin
         let backgroundColor: UIColor
         switch location.type {
         case 0:
-            backgroundColor = UIColor.defaultBackgroundColor
+            backgroundColor = UIColor.defaultCellBackgroundColor
         case 1:
-            backgroundColor = UIColor.museumBackgroundColor
+            backgroundColor = UIColor.museumCellBackgroundColor
         case 2:
-            backgroundColor = UIColor.parkBackgroundColor
+            backgroundColor = UIColor.parkCellBackgroundColor
         case 3:
-            backgroundColor = UIColor.historicalBackgroundColor
+            backgroundColor = UIColor.historicalCellBackgroundColor
         default:
             backgroundColor = UIColor.white
         }

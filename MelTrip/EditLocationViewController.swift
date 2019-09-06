@@ -36,8 +36,6 @@ class EditLocationViewController: UIViewController, UIGestureRecognizerDelegate,
         self.locationAnnotation = MKPointAnnotation()
         self.locationAnnotation!.coordinate = CLLocationCoordinate2D(latitude: location!.latitude, longitude: location!.longitude)
         self.mapView.addAnnotation(locationAnnotation!)
-        print(locationAnnotation!.coordinate.latitude)
-        print(locationAnnotation!.coordinate.longitude)
         
         self.nameTextField.text = location?.name
         self.introductionTextView.text = location?.introduction
@@ -103,10 +101,7 @@ class EditLocationViewController: UIViewController, UIGestureRecognizerDelegate,
             location?.latitude = latitude
             location?.longitude = longitude
             location?.type = type
-            //            let location = Location(name: name, introduction: introduction, latitude: latitude, longitude: longitude, image: image)
-            //            let _ = locationDelegate!.addLocation(newLocation: location)
             databaseController?.updateLocation(location: location!)
-            print("updated")
             self.dismiss(animated: true, completion: nil)
             return
         }
@@ -118,7 +113,7 @@ class EditLocationViewController: UIViewController, UIGestureRecognizerDelegate,
             errorMsg.append("\n- Please enter introduction")
         }
         if (locationAnnotation == nil) {
-            errorMsg.append("\n- Please choose a locatin on the map")
+            errorMsg.append("\n- Please choose a location on the map")
         }
         if (imageView.image == nil || imageView.image == UIImage(named: "placeholder")) {
             errorMsg.append("\n- Please choose a photo for the location")
@@ -141,7 +136,6 @@ class EditLocationViewController: UIViewController, UIGestureRecognizerDelegate,
     // Show annotation when tap on map
     // Modified from https://stackoverflow.com/a/53885008
     @objc func handleTap(sender: UITapGestureRecognizer) {
-        print("tapped")
         if locationAnnotation != nil {
             self.mapView.removeAnnotation(locationAnnotation!)
         }
@@ -155,8 +149,6 @@ class EditLocationViewController: UIViewController, UIGestureRecognizerDelegate,
         locationAnnotation = MKPointAnnotation()
         locationAnnotation!.coordinate = location
         self.mapView.addAnnotation(locationAnnotation!)
-        print(locationAnnotation!.coordinate.latitude)
-        print(locationAnnotation!.coordinate.longitude)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

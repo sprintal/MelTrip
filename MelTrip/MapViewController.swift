@@ -39,12 +39,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.distanceFilter = 10
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
+        
+        databaseController?.addListener(listener: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         locationManager.startUpdatingLocation()
-        databaseController?.addListener(listener: self)
         updateAnnotations(locations: allLocations)
         updateGeoLocations()
     }
@@ -52,7 +53,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         locationManager.startUpdatingLocation()
-        databaseController?.removeListener(listener: self)
+//        databaseController?.removeListener(listener: self)
     }
     
     var listenerType: ListenerType = ListenerType.locations
@@ -181,7 +182,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             pinImage = UIImage(named: fileName)!
         } else {
             let fileName = location.image
-            print(location)
             pinImage = loadImageData(fileName: fileName!)!
         }
         UIGraphicsBeginImageContext(size)
@@ -235,7 +235,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func centerOnChosen(index: Int) {
-        print(index)
         let zoomRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: allLocations[index].latitude, longitude: allLocations[index].longitude), latitudinalMeters: 500, longitudinalMeters: 500)
         mapView.setRegion(mapView.regionThatFits(zoomRegion), animated: true)
     }

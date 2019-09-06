@@ -23,9 +23,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>The Application uses this information to show your location</string>
+	<string>The Application uses this information to show your location and privide infromation when entering or exiting a location.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>The Application uses this information to show your location</string>
+	<string>The Application uses this information to show your location and privide infromation when entering or exiting a location when in background.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>The Application uses this information to show your location</string>
 	<key>UILaunchStoryboardName</key>

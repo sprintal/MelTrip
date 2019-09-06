@@ -58,7 +58,6 @@
 		FEF961FB231DBDF6001E7BC8 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		FEF961FF231DD8FA001E7BC8 /* Old Melbourne Gaol.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Old Melbourne Gaol.gpx"; sourceTree = "<group>"; };
 		FEF96200231DD8FA001E7BC8 /* Melbourne Museum.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Melbourne Museum.gpx"; sourceTree = "<group>"; };
-		FEF96201231DDA43001E7BC8 /* Chinese Museum.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Chinese Museum.gpx"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +74,6 @@
 		FE30E0F3231D2D6F00C62946 = {
 			isa = PBXGroup;
 			children = (
-				FEF96201231DDA43001E7BC8 /* Chinese Museum.gpx */,
 				FEF96200231DD8FA001E7BC8 /* Melbourne Museum.gpx */,
 				FEF961FF231DD8FA001E7BC8 /* Old Melbourne Gaol.gpx */,
 				FE30E0FE231D2D6F00C62946 /* MelTrip */,
